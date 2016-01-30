@@ -1,0 +1,9 @@
+E2EAE2 - light
+182A18 - dark green
+526C52 - gray green
+9FA99F - lighter gray green
+2E352E - dark gray green (header)
+777F7F - slate gray
+9B4600 - medium brown/orange
+D36000 - orange (header text)
+EFEFEF - off white (background)
