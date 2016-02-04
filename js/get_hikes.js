@@ -13,7 +13,7 @@ $(document).ready(function() {
 				output += "<li>" + data.rows[i].value.location + "</li>";
 				output += "<li>" + data.rows[i].value.distance + "</li>";
 				for (var j=0; j < data.rows[i].value.attachments.length; j++) {
-					output += "<li>" + data.rows[i].value.attachments[j] + "</li>";
+					output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.attachments[j] + "\" height=200>";
 				}
 				output += "</ul>";
 				output += "</li>";
