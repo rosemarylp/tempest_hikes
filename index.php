@@ -5,7 +5,7 @@
 	<title>Tempest Hikes</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="js/get_hikes.js"></script>
+	<!-- <script src="js/get_hikes.js"></script> -->
 </head>
 <body>
 	<header>
@@ -14,7 +14,9 @@
 	</header>
 	<main>
 		<h2>Hikes</h2>
-		<div id="hike_summaries"></div>
+		<div id="hike_summaries">
+			<?php include 'inc/render_map.inc.php'; ?>
+		</div>
 		<!-- Google map showing hikes as markers -->
 
 		<section class="recent-hikes">
