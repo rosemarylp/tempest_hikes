@@ -10,7 +10,7 @@ require_once 'connect.inc.php';
 
 	for ($i=0; $i < count($hikes->rows); $i++) {
 		$output .= "<li>" . $hikes->rows[$i]->value->name . "<ul>";
-		$output .= "<li>" . $hikes->rows[$i]->value->location . "</li>";
+		$output .= "<li>" . $hikes->rows[$i]->value->lat . ", " . $hikes->rows[$i]->value->long . "</li>";
 		$output .= "<li>" . $hikes->rows[$i]->value->distance . "</li>";
 		for ($j=0; $j < count($hikes->rows[$i]->value->attachments); $j++) {
 			$output .= "<img src=\"http://127.0.0.1:5984/tempest_hikes/" . $hikes->rows[$i]->id . "/" . $hikes->rows[$i]->value->attachments[$j] . "\" height=200>";
