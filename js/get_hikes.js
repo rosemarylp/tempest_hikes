@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	function get_hike_summaries() {
-		var url = "inc/get_hike_summaries.inc.php";
+		var url = "inc/call_db.inc.php?view=hike_summaries";
 		$.ajax({
 			method: "GET",
 			url: url,
@@ -19,7 +19,7 @@ $(document).ready(function() {
 				output += "</li>";
 			}
 			output += "</ul>";
-			$('#hike_summaries').html(output);
+			$('#hike_summaries').append(output);
 		});
 	}
 

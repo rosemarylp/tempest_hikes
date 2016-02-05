@@ -30,11 +30,16 @@ require_once 'connect.inc.php';
 		};
 		var map = new google.maps.Map(document.getElementById("map"),
 		    mapOptions);
+		var marker = new google.maps.Marker({
+			position:myLatlng,
+		});
+
+		marker.setMap(map);
 	</script>
 	<!-- <script async defer
 	        src="https://maps.googleapis.com/maps/api/js?key=<?php //echo $maps_key; ?>&signed_in=true&callback=initMap"></script> -->
 	<?php 
 
-	echo $output;
+	//echo $output;
 
  ?>
