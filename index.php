@@ -1,3 +1,4 @@
+<?php require_once 'inc/connect.inc.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
 	<title>Tempest Hikes</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=<?php echo $maps_key; ?>"></script>
 	<!-- <script src="js/get_hikes.js"></script> -->
 </head>
 <body>
