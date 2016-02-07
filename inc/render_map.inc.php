@@ -36,6 +36,7 @@ require_once 'connect.inc.php';
 
 		marker.setMap(map);
 	</script>
+	<section id="hike_info"></section>
 	<!-- <script async defer
 	        src="https://maps.googleapis.com/maps/api/js?key=<?php //echo $maps_key; ?>&signed_in=true&callback=initMap"></script> -->
 	<?php 

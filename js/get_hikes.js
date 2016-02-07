@@ -21,18 +21,17 @@ $(document).ready(function() {
 					content:content_string
 				});
 
+				var this_lat = data.rows[i].key.lat;
+				var this_lng = data.rows[i].key.long;
 
-				var this_hike_location = new google.maps.LatLng(data.rows[i].value.lat, data.rows[i].value.long);
+				var this_hike_location = new google.maps.LatLng(this_lat, this_lng);
+
 
 				var marker = new google.maps.Marker({
 					position:this_hike_location,
 				});
-
+				show_info(marker,this_lat,this_lng);
 				marker.setMap(map);
-
-				marker.addListener('click', function() {
-					infowindow.open(map, marker);
-				})
 
 				// output += "<li>" + data.rows[i].value.name + "<ul>";
 				// output += "<li>" + data.rows[i].value.location + "</li>";
@@ -42,6 +41,17 @@ $(document).ready(function() {
 				// }
 				// output += "</ul>";
 				// output += "</li>";
+			}
+			function show_info(marker,this_lat,this_lng) {
+				marker.addListener('click', function() {
+					for (var j=0; j < data.rows.length; j++) {
+
+						if (data.rows[j].key.lat == this_lat && data.rows[j].key.long == this_lng) {
+							alert(data.rows[j].value.name);
+						}
+					}
+
+				});
 			}
 			//output += "</ul>";
 			//$('#hike_summaries').append(output);
