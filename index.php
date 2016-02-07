@@ -19,6 +19,7 @@
 		<div id="hike_summaries">
 			<?php include 'inc/render_map.inc.php'; ?>
 		</div>
+		<div id="full_hike_info"></div>
 		<!-- Google map showing hikes as markers -->
 
 		<section class="recent-hikes">
