@@ -7,7 +7,7 @@ $(document).ready(function() {
 			dataType: 'json'
 		}).done(function(data) {
 			$('#map').hide();
-			$('#hike_summaries').hide();
+			$('#hike_summary').hide();
 			var output = "<h3>" + data.rows[0].value.name + "</h3>";
 			output += "<h4>Area: " + data.rows[0].value.area + "</h4>";
 			output += "<h4>Distance: " + data.rows[0].value.distance + "</h4>";
@@ -18,7 +18,13 @@ $(document).ready(function() {
 			for (var i=0; i < data.rows[0].value.attachments.length; i++) {
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[i] + "\" height=200>";
 			} //end for
+			output += "<button id=\"close\">Close</button>";
+			$('#full_hike_info').show();
 			$('#full_hike_info').html(output);
+			$('#close').click(function() {
+				$('#full_hike_info').hide();
+				$('#map').show();
+			})
 		});
 	}
 
@@ -59,6 +65,7 @@ $(document).ready(function() {
 								output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[j].id + "/" + data.rows[j].value.attachments[k] + "\" height=200>";
 							} //end for
 							output += "<button>More</button>";
+							$('#hike_summary').show();
 							$('#hike_summary').html(output);
 							$('#hike_summary button').click(function() {
 								get_full_info(this_lat, this_lng);

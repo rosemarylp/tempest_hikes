@@ -16,9 +16,9 @@
 	</header>
 	<main>
 		<h2>Hikes</h2>
-		<div id="hike_summaries">
+		<!-- <div id="hike_summaries"> -->
 			<?php include 'inc/render_map.inc.php'; ?>
-		</div>
+		<!-- </div> -->
 		<div id="full_hike_info"></div>
 		<!-- Google map showing hikes as markers -->
 
