@@ -26,7 +26,7 @@ $(document).ready(function() {
 				$('#map').show();
 			})
 		});
-	}
+	} //end get_full_info
 
 	function get_hike_summaries() {
 		var url = "inc/call_db.inc.php?view=hike_summaries";
@@ -77,10 +77,21 @@ $(document).ready(function() {
 		});
 	} //end get_hike_summaries
 
+	function get_hike_feed() {
+		var url = "inc/call_db.inc.php?view=hike_feed";
+		$.ajax({
+			url: url,
+			method: "GET",
+			dataType: "json"
+		}).done(function(data) {
+			for (var i = 0; i < data.rows.length; i++) {
+				output = data.rows[i].value.name;
+			};
+			$('#hike_feed').html(output);
+		});
+	}
 
-
-
-
-	get_hike_summaries();
+	// get_hike_summaries();
+	get_hike_feed();
 });
 
