@@ -24,7 +24,7 @@ $(document).ready(function() {
 			$('#close').click(function() {
 				$('#full_hike_info').hide();
 				$('#map').show();
-			})
+			});
 		});
 	} //end get_full_info
 
@@ -85,11 +85,21 @@ $(document).ready(function() {
 			dataType: "json"
 		}).done(function(data) {
 			for (var i = 0; i < data.rows.length; i++) {
-				output = data.rows[i].value.name;
-			};
+				output = "<section>";
+				output += "<h3>" + data.rows[i].value.name + "</h3>";
+				output += "<h4>Area: " + data.rows[i].value.area + "</h4>";
+				output += "<h4>Distance: " + data.rows[i].value.distance + "</h4>";
+				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "</h4>";
+				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
+				output += "<p>" + data.rows[i].value.description + "...";
+				output += "<button onclick=\"get_full_info(" + data.rows[i].key.lat + "," + data.rows[i].key.lng + ")\">More</button></p>";
+				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
+				output += "</section>";
+				} //end for
 			$('#hike_feed').html(output);
-		});
-	}
+
+			});
+		}
 
 	// get_hike_summaries();
 	get_hike_feed();
