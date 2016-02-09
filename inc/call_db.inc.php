@@ -13,7 +13,7 @@ switch ($view) {
 		break;
 
 	case 'hike_feed':
-		$url = "http://127.0.0.1:5984/tempest_hikes/_design/tempest_hikes/_view/hike_feed?limit=1";
+		$url = "http://127.0.0.1:5984/tempest_hikes/_design/tempest_hikes/_view/hike_feed?descending=true";
 		break;
 
 	case 'full_hike_info':
