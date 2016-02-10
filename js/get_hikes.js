@@ -7,6 +7,7 @@ $(document).ready(function() {
 			dataType: 'json'
 		}).done(function(data) {
 			$('#map').hide();
+			$('#hike_feed').hide();
 			$('#hike_summary').hide();
 			var output = "<h3>" + data.rows[0].value.name + "</h3>";
 			output += "<h4>Area: " + data.rows[0].value.area + "</h4>";
@@ -24,6 +25,7 @@ $(document).ready(function() {
 			$('#close').click(function() {
 				$('#full_hike_info').hide();
 				$('#map').show();
+				$('#hike_feed').show();
 			});
 		});
 	} //end get_full_info
@@ -84,7 +86,6 @@ $(document).ready(function() {
 			method: "GET",
 			dataType: "json"
 		}).done(function(data) {
-			// output = "";
 			for (var i = 0; i < data.rows.length; i++) {
 				var lat = data.rows[i].value.lat;
 				var lng = data.rows[i].value.lng;
@@ -95,30 +96,22 @@ $(document).ready(function() {
 				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "</h4>";
 				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
 				output += "<h4>Date Hiked: " + data.rows[i].key + "</h4>";
-				output += "<h3>" + data.rows[i].value.lat + data.rows[i].value.lng + "</h3>";
-
-				output += "<p>" + data.rows[i].value.description + "...</p>";
-				output += "<button>More</button>";
-				// output += "<button onclick=\"get_full_info(" + data.rows[i].value.lat + "," + data.rows[i].value.lng + ")\">More</button></p>";
-				// output += add_handler(data.rows[i].value.lat, data.rows[i].value.lng);
+				output += "<p>" + data.rows[i].value.description + "...<button>More</button></p>";
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
 				output += "</section>";
 				$('#hike_feed').append(output);
 				add_handler(lat,lng);
 			} //end for
-			
 
 			function add_handler(lat,lng) {
-				// alert(lat,lng);
 				$('#hike_feed section:last-of-type button').click(function() {
 					get_full_info(lat,lng);
-					
 				});
 			}
 			});
 		}
 
-	// get_hike_summaries();
+	get_hike_summaries();
 	get_hike_feed();
 });
 

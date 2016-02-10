@@ -16,15 +16,11 @@
 	</header>
 	<main>
 		<h2>Hikes</h2>
-		<!-- <div id="hike_summaries"> -->
-			<?php //include 'inc/render_map.inc.php'; ?>
-		<!-- </div> -->
+			<?php include 'inc/render_map.inc.php'; ?>
 		<div id="full_hike_info"></div>
-		<!-- Google map showing hikes as markers -->
 
-		<section class="recent-hikes">
+		<section id="hike_feed">
 			<h2>Recent Hikes</h2>
-			<div id="hike_feed"></div>
 			<!-- This will be a feed of recent entries in the hiking guide, newest first -->
 			<!-- With a link to view the entire entry -->
 		</section>
