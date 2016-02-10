@@ -84,22 +84,37 @@ $(document).ready(function() {
 			method: "GET",
 			dataType: "json"
 		}).done(function(data) {
-			output = "";
+			// output = "";
 			for (var i = 0; i < data.rows.length; i++) {
-				output += "<section>";
+				var lat = data.rows[i].value.lat;
+				var lng = data.rows[i].value.lng;
+				var output = "<section>";
 				output += "<h3>" + data.rows[i].value.name + "</h3>";
 				output += "<h4>Area: " + data.rows[i].value.area + "</h4>";
 				output += "<h4>Distance: " + data.rows[i].value.distance + "</h4>";
 				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "</h4>";
 				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
 				output += "<h4>Date Hiked: " + data.rows[i].key + "</h4>";
-				output += "<p>" + data.rows[i].value.description + "...";
-				output += "<button onclick=\"get_full_info(" + data.rows[i].value.lat + "," + data.rows[i].value.lng + ")\">More</button></p>";
+				output += "<h3>" + data.rows[i].value.lat + data.rows[i].value.lng + "</h3>";
+
+				output += "<p>" + data.rows[i].value.description + "...</p>";
+				output += "<button>More</button>";
+				// output += "<button onclick=\"get_full_info(" + data.rows[i].value.lat + "," + data.rows[i].value.lng + ")\">More</button></p>";
+				// output += add_handler(data.rows[i].value.lat, data.rows[i].value.lng);
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
 				output += "</section>";
-				} //end for
-			$('#hike_feed').html(output);
+				$('#hike_feed').append(output);
+				add_handler(lat,lng);
+			} //end for
+			
 
+			function add_handler(lat,lng) {
+				// alert(lat,lng);
+				$('#hike_feed section:last-of-type button').click(function() {
+					get_full_info(lat,lng);
+					
+				});
+			}
 			});
 		}
 
