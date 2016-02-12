@@ -89,15 +89,19 @@ $(document).ready(function() {
 			for (var i = 0; i < data.rows.length; i++) {
 				var lat = data.rows[i].value.lat;
 				var lng = data.rows[i].value.lng;
-				var output = "<section>";
+				var output = "<section class=\"feed_item\">";
 				output += "<h3>" + data.rows[i].value.name + "</h3>";
+				output += "<div class=\"feed_details_container\">";
 				output += "<h4>Area: " + data.rows[i].value.area + "</h4>";
-				output += "<h4>Distance: " + data.rows[i].value.distance + "</h4>";
-				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "</h4>";
+				output += "<h4>Distance: " + data.rows[i].value.distance + " miles</h4>";
+				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "ft.</h4>";
 				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
 				output += "<h4>Date Hiked: " + data.rows[i].key + "</h4>";
-				output += "<p>" + data.rows[i].value.description + "...<button>More</button></p>";
+				output += "<p>" + data.rows[i].value.description + "...</p>";
+				output += "</div>";
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
+				output += "<button>More</button>";
+
 				output += "</section>";
 				$('#hike_feed').append(output);
 				add_handler(lat,lng);

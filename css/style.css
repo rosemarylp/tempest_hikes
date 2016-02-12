@@ -20,7 +20,39 @@ header {
   header h1 {
     padding-left: .5em; }
 
+h2 {
+  font-size: 1.8em; }
+
+h3 {
+  font-size: 1.3em;
+  flex: 1 100%;
+  margin: .3em 0; }
+
 main {
   padding: 1em; }
+
+.feed_item {
+  width: 80%;
+  padding: 1em;
+  display: flex;
+  flex-flow: row wrap; }
+  .feed_item h4 {
+    margin: 1em 0; }
+  .feed_item div {
+    flex: 1 60%;
+    padding-right: 1.5em; }
+  .feed_item img {
+    flex: 1 40%;
+    border: 1px solid #4b684b; }
+  .feed_item button {
+    background-color: #4b684b;
+    color: #E2EAE2;
+    border: none;
+    padding: .3em 1em;
+    font-family: "Roboto Condensed", serif; }
+  @media screen and (max-width: 800px) {
+    .feed_item {
+      flex-flow: column wrap;
+      width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,6 +9,8 @@ $dark-gray: #2E352E;
 $body: Roboto, sans-serif;
 $heading: "Roboto Condensed", serif;
 
+$breakpoint: 800px;
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -33,6 +35,50 @@ header {
 	}
 }
 
+h2 {
+	font-size: 1.8em;
+}
+
+h3 {
+	font-size: 1.3em;
+	flex: 1 100%;
+	margin: .3em 0;
+}
+
 main {
 	padding: 1em;
+}
+
+.feed_item {
+	width: 80%;
+	padding: 1em;
+	display: flex;
+	flex-flow: row wrap;
+
+	h4 {
+		margin: 1em 0;
+	}
+
+	div {
+		flex: 1 60%;
+		padding-right: 1.5em;
+	}
+
+	img {
+		flex: 1 40%;
+		border: 1px solid darken($lightest-green,55%);
+	}
+
+	button {
+		background-color: darken($lightest-green,55%);
+		color: $lightest-green;
+		border: none;
+		padding: .3em 1em;
+		font-family: $heading;
+	}
+
+	@media screen and (max-width: $breakpoint) {
+		flex-flow: column wrap;
+		width: 100%;
+	}
 }
