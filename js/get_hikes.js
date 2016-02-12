@@ -96,7 +96,7 @@ $(document).ready(function() {
 				output += "<h4>Distance: " + data.rows[i].value.distance + " miles</h4>";
 				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "ft.</h4>";
 				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
-				output += "<h4>Date Hiked: " + data.rows[i].key + "</h4>";
+				output += "<h4>Date Hiked: " + moment(data.rows[i].key, "YYYY-MM-DD").format("MMMM Do, YYYY") + "</h4>";
 				output += "<p>" + data.rows[i].value.description + "...</p>";
 				output += "</div>";
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
