@@ -24,9 +24,24 @@ h2 {
   font-size: 1.8em; }
 
 h3 {
-  font-size: 1.3em;
+  font-size: 1.4em;
   flex: 1 100%;
   margin: .3em 0; }
+
+h4 {
+  font-size: 1.2em; }
+
+h5 {
+  font-size: 1em;
+  margin-top: 0;
+  background: #2E352E;
+  color: #ff943a;
+  padding: .5em; }
+
+h6 {
+  font-size: .9em;
+  margin-bottom: .1em;
+  margin-top: .5em; }
 
 main {
   padding: 1em; }
@@ -54,5 +69,15 @@ main {
     .feed_item {
       flex-flow: column wrap;
       width: 100%; } }
+
+#weather {
+  display: flex;
+  flex-flow: row wrap; }
+  #weather h4 {
+    flex: 1 100%; }
+  #weather section {
+    flex: 1 20%;
+    flex-flow: column wrap;
+    margin-bottom: 2.5em; }
 
 /*# sourceMappingURL=style.css.map */

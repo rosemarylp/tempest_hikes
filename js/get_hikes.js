@@ -9,16 +9,16 @@ $(document).ready(function() {
 			var output = "";
 			output += "<h4>Weather</h4>";
 			for (var i = 0; i < data.forecast.simpleforecast.forecastday.length; i++) {
-				output += "<ul>";
-				output += "<li>Date: " + data.forecast.simpleforecast.forecastday[i].date.pretty + "</li>";
-				output += "<li>Hi: " + data.forecast.simpleforecast.forecastday[i].high.fahrenheit + " Lo: " + data.forecast.simpleforecast.forecastday[i].low.fahrenheit + "</li>";
-				output += "<li>Conditions: " + data.forecast.simpleforecast.forecastday[i].conditions + "</li>";
-				output += "<li><img src=\"" + data.forecast.simpleforecast.forecastday[i].icon_url + "\"></li>";
-				output += "<li>Precipitation: " + data.forecast.simpleforecast.forecastday[i].qpf_allday.in + "</li>";
-				output += "<li>Snowfall: " + data.forecast.simpleforecast.forecastday[i].snow_allday.in + "</li>";
-				output += "<li>Avg Wind: " + data.forecast.simpleforecast.forecastday[i].avewind.mph + "</li>";
-				output += "<li>Humidity: " + data.forecast.simpleforecast.forecastday[i].avehumidity + "</li>";
-				output += "</ul>";
+				output += "<section>";
+				output += "<h5>" + moment(data.forecast.simpleforecast.forecastday[i].date.epoch, "X").format("M/D") + "</h5>";
+				output += "<img src=\"" + data.forecast.simpleforecast.forecastday[i].icon_url + "\">";
+				output += "<h6>" + data.forecast.simpleforecast.forecastday[i].high.fahrenheit + "&deg;/" + data.forecast.simpleforecast.forecastday[i].low.fahrenheit + "&deg;</h6>";
+				output += "<h6>" + data.forecast.simpleforecast.forecastday[i].conditions + "</h6>";
+				output += "<h6>Precip: </h6>" + data.forecast.simpleforecast.forecastday[i].qpf_allday.in + "\"";
+				output += "<h6>Snow: </h6>" + data.forecast.simpleforecast.forecastday[i].snow_allday.in + "\"";
+				output += "<h6>Avg Wind: </h6>" + data.forecast.simpleforecast.forecastday[i].avewind.mph + "mph";
+				output += "<h6>Humidity: </h6>" + data.forecast.simpleforecast.forecastday[i].avehumidity + "%";
+				output += "</section>";
 			}
 
 			$('#weather').html(output);

@@ -4,6 +4,7 @@
 //colors
 $lightest-green: #E2EAE2;
 $dark-gray: #2E352E;
+$orange: #D36000;
 
 //fonts
 $body: Roboto, sans-serif;
@@ -40,9 +41,27 @@ h2 {
 }
 
 h3 {
-	font-size: 1.3em;
+	font-size: 1.4em;
 	flex: 1 100%;
 	margin: .3em 0;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+h5 {
+	font-size: 1em;
+	margin-top: 0;
+	background: $dark-gray;
+	color: lighten($orange, 20%);
+	padding: .5em;
+}
+
+h6 {
+	font-size: .9em;
+	margin-bottom: .1em;
+	margin-top: .5em;
 }
 
 main {
@@ -80,5 +99,20 @@ main {
 	@media screen and (max-width: $breakpoint) {
 		flex-flow: column wrap;
 		width: 100%;
+	}
+}
+
+#weather {
+	display: flex;
+	flex-flow: row wrap;
+
+	h4 {
+		flex: 1 100%;
+	}
+
+	section {
+		flex: 1 20%;
+		flex-flow: column wrap;
+		margin-bottom: 2.5em;
 	}
 }
