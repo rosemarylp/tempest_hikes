@@ -79,10 +79,15 @@ main {
   display: flex;
   flex-flow: row wrap; }
   #weather h4 {
-    flex: 1 100%; }
+    flex: 1 100%;
+    margin-bottom: .5em; }
   #weather section {
     flex: 1 20%;
     flex-flow: column wrap;
     margin-bottom: 2.5em; }
+  #weather span {
+    flex: 1 100%; }
+    #weather span img {
+      max-width: 10em; }
 
 /*# sourceMappingURL=style.css.map */

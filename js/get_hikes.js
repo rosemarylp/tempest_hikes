@@ -8,6 +8,7 @@ $(document).ready(function() {
 		}).done(function(data) {
 			var output = "";
 			output += "<h4>Weather</h4>";
+			output += "<span>Powered by Weather Underground <img src=\"images/wunderground.jpg\"></span>";
 			for (var i = 0; i < data.forecast.simpleforecast.forecastday.length; i++) {
 				output += "<section>";
 				output += "<h5>" + moment(data.forecast.simpleforecast.forecastday[i].date.epoch, "X").format("M/D") + "</h5>";
