@@ -36,10 +36,10 @@ $(document).ready(function() {
 			$('#hike_feed').hide();
 			$('#hike_summary').hide();
 			var output = "<h3>" + data.rows[0].value.name + "</h3>";
-			output += "<h4>Area: " + data.rows[0].value.area + "</h4>";
-			output += "<h4>Distance: " + data.rows[0].value.distance + "</h4>";
-			output += "<h4>Elevation Gain: " + data.rows[0].value.elevation_gain + "</h4>";
-			output += "<h4>Type: " + data.rows[0].value.type + "</h4>";
+			output += "<h4>Area: </h4>" + data.rows[0].value.area;
+			output += "<h4>Distance: </h4>" + data.rows[0].value.distance + "mi.";
+			output += "<h4>Elevation Gain: </h4>" + data.rows[0].value.elevation_gain + "ft.";
+			output += "<h4>Type: </h4>" + data.rows[0].value.type;
 			output += "<p>" + data.rows[0].value.description + "</p>";
 
 			for (var i=0; i < data.rows[0].value.attachments.length; i++) {
@@ -119,11 +119,11 @@ $(document).ready(function() {
 				var output = "<section class=\"feed_item\">";
 				output += "<h3>" + data.rows[i].value.name + "</h3>";
 				output += "<div class=\"feed_details_container\">";
-				output += "<h4>Area: </h4>" + data.rows[i].value.area + "</h4>";
-				output += "<h4>Distance: " + data.rows[i].value.distance + " miles</h4>";
-				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "ft.</h4>";
-				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
-				output += "<h4>Date Hiked: " + moment(data.rows[i].key, "YYYY-MM-DD").format("MMMM Do, YYYY") + "</h4>";
+				output += "<h4>Area: </h4>" + data.rows[i].value.area;
+				output += "<h4>Distance: </h4>" + data.rows[i].value.distance + " miles";
+				output += "<h4>Elevation Gain: </h4>" + data.rows[i].value.elevation_gain + "ft.";
+				output += "<h4>Type: </h4>" + data.rows[i].value.type;
+				output += "<h4>Date Hiked: </h4>" + moment(data.rows[i].key, "YYYY-MM-DD").format("MMMM Do, YYYY");
 				output += "<p>" + data.rows[i].value.description + "...</p>";
 				output += "</div>";
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[i].id + "/" + data.rows[i].value.image + "\" height=200>";
