@@ -24,6 +24,10 @@ switch ($view) {
 		$url .= "}";
 		break;
 
+	case 'weather':
+		$url = "http://api.wunderground.com/api/" . $weather_key . "/forecast10day/q/" . $lat . "," . $lng . ".json";
+		break;
+
 	default:
 		# code...
 		break;

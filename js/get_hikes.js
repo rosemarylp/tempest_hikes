@@ -1,4 +1,29 @@
 $(document).ready(function() {
+	function get_weather(lat, lng) {
+		var url = "inc/call_db.inc.php?view=weather&lat=" + lat + "&lng=" + lng;
+		$.ajax({
+			method: "GET",
+			url: url,
+			dataType: "json"
+		}).done(function(data) {
+			var output = "";
+			output += "<h4>Weather</h4>";
+			for (var i = 0; i < data.forecast.simpleforecast.forecastday.length; i++) {
+				output += "<ul>";
+				output += "<li>Date: " + data.forecast.simpleforecast.forecastday[i].date.pretty + "</li>";
+				output += "<li>Hi: " + data.forecast.simpleforecast.forecastday[i].high.fahrenheit + " Lo: " + data.forecast.simpleforecast.forecastday[i].low.fahrenheit + "</li>";
+				output += "<li>Conditions: " + data.forecast.simpleforecast.forecastday[i].conditions + "</li>";
+				output += "<li><img src=\"" + data.forecast.simpleforecast.forecastday[i].icon_url + "\"></li>";
+				output += "<li>Precipitation: " + data.forecast.simpleforecast.forecastday[i].qpf_allday.in + "</li>";
+				output += "<li>Snowfall: " + data.forecast.simpleforecast.forecastday[i].snow_allday.in + "</li>";
+				output += "<li>Avg Wind: " + data.forecast.simpleforecast.forecastday[i].avewind.mph + "</li>";
+				output += "<li>Humidity: " + data.forecast.simpleforecast.forecastday[i].avehumidity + "</li>";
+				output += "</ul>";
+			}
+
+			$('#weather').html(output);
+		});
+	}
 	function get_full_info(lat, lng) {
 		var url = "inc/call_db.inc.php?view=full_hike_info&lat=" + lat + "&lng=" + lng;
 		$.ajax({
@@ -19,9 +44,12 @@ $(document).ready(function() {
 			for (var i=0; i < data.rows[0].value.attachments.length; i++) {
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[i] + "\" height=200>";
 			} //end for
+			output += "<section id=\"weather\">";
+			output += "</section>";
 			output += "<button id=\"close\">Close</button>";
-			$('#full_hike_info').show();
 			$('#full_hike_info').html(output);
+			get_weather(lat,lng);
+			$('#full_hike_info').show();
 			$('#close').click(function() {
 				$('#full_hike_info').hide();
 				$('#map').show();
