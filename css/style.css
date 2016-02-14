@@ -43,6 +43,13 @@ h6 {
   margin-bottom: .1em;
   margin-top: .5em; }
 
+button {
+  background-color: #4b684b;
+  color: #E2EAE2;
+  border: none;
+  padding: .3em 1em;
+  font-family: "Roboto Condensed", serif; }
+
 main {
   padding: 1em; }
 
@@ -59,12 +66,6 @@ main {
   .feed_item img {
     flex: 1 40%;
     border: 1px solid #4b684b; }
-  .feed_item button {
-    background-color: #4b684b;
-    color: #E2EAE2;
-    border: none;
-    padding: .3em 1em;
-    font-family: "Roboto Condensed", serif; }
   @media screen and (max-width: 800px) {
     .feed_item {
       flex-flow: column wrap;

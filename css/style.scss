@@ -64,6 +64,14 @@ h6 {
 	margin-top: .5em;
 }
 
+button {
+	background-color: darken($lightest-green,55%);
+	color: $lightest-green;
+	border: none;
+	padding: .3em 1em;
+	font-family: $heading;
+}
+
 main {
 	padding: 1em;
 }
@@ -86,14 +94,6 @@ main {
 	img {
 		flex: 1 40%;
 		border: 1px solid darken($lightest-green,55%);
-	}
-
-	button {
-		background-color: darken($lightest-green,55%);
-		color: $lightest-green;
-		border: none;
-		padding: .3em 1em;
-		font-family: $heading;
 	}
 
 	@media screen and (max-width: $breakpoint) {
