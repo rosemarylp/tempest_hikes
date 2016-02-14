@@ -53,6 +53,10 @@ button {
 main {
   padding: 1em; }
 
+#map {
+  height: 50vh;
+  border: 1px solid #4b684b; }
+
 .feed_item {
   width: 80%;
   padding: 1em;

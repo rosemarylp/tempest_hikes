@@ -17,7 +17,7 @@
 	</header>
 	<main>
 		<h2>Hikes</h2>
-			<?php //include 'inc/render_map.inc.php'; ?>
+			<?php include 'inc/render_map.inc.php'; ?>
 		<div id="full_hike_info"></div>
 
 		<section id="hike_feed">

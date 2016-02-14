@@ -65,8 +65,6 @@ $(document).ready(function() {
 			url: url,
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(typeof data);
-			//var output = "<ul>";
 			for (var i = 0; i < data.rows.length; i++) {
 				var this_lat = data.rows[i].key.lat;
 				var this_lng = data.rows[i].key.lng;
@@ -76,7 +74,7 @@ $(document).ready(function() {
 				var marker = new google.maps.Marker({
 					position:this_hike_location,
 				});
-				
+
 				//Adds click event listener to each marker
 				add_hike_info(marker,this_lat,this_lng);
 
@@ -120,7 +118,7 @@ $(document).ready(function() {
 				var output = "<section class=\"feed_item\">";
 				output += "<h3>" + data.rows[i].value.name + "</h3>";
 				output += "<div class=\"feed_details_container\">";
-				output += "<h4>Area: " + data.rows[i].value.area + "</h4>";
+				output += "<h4>Area: </h4>" + data.rows[i].value.area + "</h4>";
 				output += "<h4>Distance: " + data.rows[i].value.distance + " miles</h4>";
 				output += "<h4>Elevation Gain: " + data.rows[i].value.elevation_gain + "ft.</h4>";
 				output += "<h4>Type: " + data.rows[i].value.type + "</h4>";
