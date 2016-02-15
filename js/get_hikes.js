@@ -41,6 +41,12 @@ $(document).ready(function() {
 			output += "<h4>Elevation Gain: </h4>" + data.rows[0].value.elevation_gain + "ft.";
 			output += "<h4>Type: </h4>" + data.rows[0].value.type;
 			output += "<p>" + data.rows[0].value.description + "</p>";
+			output += "<h4>Driving Directions: </h4>";
+			output += "<ul>";
+			for (var j=0; j < data.rows[0].value.directions.length; j++) {
+				output += "<li>" + data.rows[0].value.directions[j] + "</li>";
+			}
+			output += "</ul>";
 
 			for (var i=0; i < data.rows[0].value.attachments.length; i++) {
 				output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[i] + "\" height=200>";
