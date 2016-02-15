@@ -88,6 +88,30 @@ main {
 	border: 1px solid darken($lightest-green,55%);
 }
 
+#hike_summary {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	background: darken($lightest-green,60%);
+	color: $lightest-green;
+	padding: 1em;
+
+	div {
+		flex: 1 50%;
+		padding-right: 1em;
+	}
+
+	img {
+		flex: 1 40%;
+		max-height: 15em;
+	}
+
+	button {
+		background: darken($lightest-green,10%);
+		color: $dark-gray;
+	}
+}
+
 .feed_item {
 	width: 80%;
 	padding: 1em;

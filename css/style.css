@@ -62,6 +62,23 @@ main {
   height: 50vh;
   border: 1px solid #4b684b; }
 
+#hike_summary {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  background: #415941;
+  color: #E2EAE2;
+  padding: 1em; }
+  #hike_summary div {
+    flex: 1 50%;
+    padding-right: 1em; }
+  #hike_summary img {
+    flex: 1 40%;
+    max-height: 15em; }
+  #hike_summary button {
+    background: #c4d5c4;
+    color: #2E352E; }
+
 .feed_item {
   width: 80%;
   padding: 1em;

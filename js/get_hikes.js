@@ -89,10 +89,10 @@ $(document).ready(function() {
 
 						if (data.rows[j].key.lat == this_lat && data.rows[j].key.lng == this_lng) {
 							var output = "<h3>" + data.rows[j].value.name + "</h3>";
-							output += "<h4>Distance: " + data.rows[j].value.distance + "</h4>";
-							for (var k=0; k < data.rows[j].value.attachments.length; k++) {
-								output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[j].id + "/" + data.rows[j].value.attachments[k] + "\" height=200>";
-							} //end for
+							output += "<div><h4>Distance: </h4>" + data.rows[j].value.distance + "mi.";
+							output += "<h4>Elevation Gain: </h4>" + data.rows[j].value.elevation_gain + "ft.";
+							output += "<p>" + data.rows[j].value.description + "...</p></div>";
+							output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[j].id + "/" + data.rows[j].value.image + "\" height=200>";
 							output += "<button>More</button>";
 							$('#hike_summary').show();
 							$('#hike_summary').html(output);
