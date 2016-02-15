@@ -18,9 +18,6 @@ require_once 'connect.inc.php';
 		};
 		var map = new google.maps.Map(document.getElementById("map"),
 		    mapOptions);
-		var marker = new google.maps.Marker({
-			position:myLatlng,
-		});
 
 		marker.setMap(map);
 	</script>
