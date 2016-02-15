@@ -110,6 +110,18 @@ main {
 		background: darken($lightest-green,10%);
 		color: $dark-gray;
 	}
+
+	@media screen and (max-width: $breakpoint) {
+		flex-flow: column wrap;
+
+		div {
+			flex: 1 100%;
+		}
+
+		img {
+			flex: 1 100%;
+		}
+	}
 }
 
 .feed_item {
