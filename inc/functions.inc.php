@@ -35,8 +35,6 @@ function put_db($fields) {
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-	$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	echo "Status: " . $status_code;
 	$response = curl_exec($ch);
 
 	return $response;

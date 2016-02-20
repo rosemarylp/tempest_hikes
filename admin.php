@@ -23,6 +23,9 @@
 			<label for="area">Area:</label>
 			<input type="text" name="area" id="area" required="true">
 
+			<label for="type">Type:</label>
+			<input type="text" name="type" id="type" required="true">
+
 			<label for="date">Date Hiked: </label>
 			<input type="date" name="date" id="date" required="true">
 

@@ -3,7 +3,6 @@
 require_once 'functions.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	var_dump($_POST);
 	$fields = [];
 
 	if (isset($_POST['hike_name'])) {
@@ -47,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	$result = put_db($fields);
-	echo $result;
+	if($result) {
+		echo $result;
+	}
 }
 
 
