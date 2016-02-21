@@ -44,6 +44,9 @@
 			<label for="lng">Lng:</label>
 			<input type="number" min="-180" max="180" step=".0000000001" name="lng" id="lng" required="true">
 
+			<label for="image_upload">Image: </label>
+			<input type="file" name="image_upload" id="image_upload">
+
 			<input type="submit" name="submit" value="Submit">
 		</form>
 

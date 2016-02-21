@@ -12,14 +12,20 @@ require_once 'connect.inc.php';
 	<script>
 		var myLatlng = new google.maps.LatLng(45.725857, -121.824349);
 		var mapOptions = {
-		  zoom: 9,
+		  zoom: 8,
 		  center: myLatlng,
 		  mapTypeId: google.maps.MapTypeId.TERRAIN
 		};
 		var map = new google.maps.Map(document.getElementById("map"),
 		    mapOptions);
 
-		marker.setMap(map);
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+				map.setCenter(initialLocation);
+			});
+		}
+
 	</script>
 	<section id="hike_summary"></section>
 	<!-- <script async defer

@@ -3,6 +3,9 @@
 require_once 'functions.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	echo "<pre>";
+	print_r($_POST);
+	echo "</pre>";
 	$fields = [];
 
 	if (isset($_POST['hike_name'])) {
