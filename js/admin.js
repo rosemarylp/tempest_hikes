@@ -1,30 +1,51 @@
 $(document).ready(function() {
 
 function submit_form() {
-	var fields = $('#add_hike_form').serialize();
+	var form_contents = $('#add_hike_form').serializeArray();
+	// var image_upload = $('#image_upload');
+	var image_upload = document.getElementById('image_upload');
 	var url = "inc/submit_form.inc.php";
 
+	var files = image_upload.files;
+
 	var formData = new FormData();
-	var hike_name = $('#hike_name').val();
-	formData.append('hike_name',hike_name);
 
-	console.log(JSON.stringify(formData));
+	for (var i = 0; i < files.length; i++) {
+		//Note: http://blog.teamtreehouse.com/uploading-files-ajax
+		var file = files[i];
 
-	alert(formData);
+		// Check the file type.
+		if (!file.type.match('image.*')) {
+		    continue;
+		}
 
-	var jqxhr = $.post(url,formData,"json").done(function(data) {
-		var response = JSON.parse(data);
-		var message = response.reason;
-		$('#form_message').html(message);
-	}).fail(function() {
-		var message = "There was an error.";
-		$('#form_message').html(message);
-	});
+		// Add the file to the request.
+		formData.append('image_upload', file, file.name);
+	}
+
+	for (var j=0; j < form_contents.length; j++) {
+		formData.append(form_contents[j].name, form_contents[j].value);
+	}
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('POST', url, true);
+
+	xhr.send(formData);
+
+	// var jqxhr = $.post(url,formData,"json").done(function(data) {
+	// 	var response = JSON.parse(data);
+	// 	var message = response.reason;
+	// 	$('#form_message').html(message);
+	// }).fail(function() {
+	// 	var message = "There was an error.";
+	// 	$('#form_message').html(message);
+	// });
 }
 
 $('#add_hike_form').submit(function() {
-	submit_form();
 	event.preventDefault();
+	submit_form();
 });
 
 $(':file').change(function() {

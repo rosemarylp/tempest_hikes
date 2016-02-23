@@ -18,31 +18,31 @@
 		<h2>Add Hikes</h2>
 		<form action="#" id="add_hike_form">
 			<label for="hike_name">Hike Name:</label>
-			<input type="text" name="hike_name" id="hike_name" required="true">
+			<input type="text" name="hike_name" id="hike_name" >
 
 			<label for="area">Area:</label>
-			<input type="text" name="area" id="area" required="true">
+			<input type="text" name="area" id="area" >
 
 			<label for="type">Type:</label>
-			<input type="text" name="type" id="type" required="true">
+			<input type="text" name="type" id="type" >
 
 			<label for="date">Date Hiked: </label>
-			<input type="date" name="date" id="date" required="true">
+			<input type="date" name="date" id="date" >
 
 			<label for="description">Description:</label>
-			<textarea name="description" id="description" cols="30" rows="10" required="true"></textarea>
+			<textarea name="description" id="description" cols="30" rows="10" ></textarea>
 
 			<label for="distance">Distance:</label>
-			<input type="number" min=".1" max="50" step=".1" name="distance" id="distance" required="true">
+			<input type="number" min=".1" max="50" step=".1" name="distance" id="distance" >
 
 			<label for="elevation_gain">Elevation Gain:</label>
-			<input type="number" min=".1" max="15000" step=".1" name="elevation_gain" id="elevation_gain" required="true">
+			<input type="number" min=".1" max="15000" step=".1" name="elevation_gain" id="elevation_gain" >
 
 			<label for="lat">Lat:</label>
-			<input type="number" min="-90" max="90" step=".000000001" name="lat" id="lat" required="true">
+			<input type="number" min="-90" max="90" step=".000000001" name="lat" id="lat" >
 
 			<label for="lng">Lng:</label>
-			<input type="number" min="-180" max="180" step=".0000000001" name="lng" id="lng" required="true">
+			<input type="number" min="-180" max="180" step=".0000000001" name="lng" id="lng" >
 
 			<label for="image_upload">Image: </label>
 			<input type="file" name="image_upload" id="image_upload">
