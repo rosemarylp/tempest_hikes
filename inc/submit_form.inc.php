@@ -4,8 +4,8 @@ require_once 'functions.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	echo "<pre>";
-	print_r($_POST);
-	print_r($_FILES);
+	// print_r($_POST);
+	// print_r($_FILES);
 	echo "</pre>";
 	$fields = [];
 
@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$upload_dir = "../uploads";
 
 	if(move_uploaded_file($tmp_name, $upload_dir . "/" . $file_name)) {
-		echo "Moved to {$upload_dir}";
 		$file_path = $upload_dir . "/" . $file_name;
 		$list_files = scandir($upload_dir);
 		foreach ($list_files as $file) {
@@ -70,16 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	// $data = file_get_contents($tmp_name);
 	// $base64_data = base64_encode($data);
 
-	$attachment = [];
-	// $attachment["content_type"] = $_FILES["image_upload"]["type"];
-	// $attachment["data"] = $base64_data;
+	$attachment["name"] = $file_name;
+	$attachment["content-type"] = $_FILES["image_upload"]["type"];
+	$attachment["data"] = $base64_data;
 	// $attachment["name"] = $file_name;
 
-	$fields["_attchments"] = $attachment;
+	// $fields["_attachments"] = $attachment;
+
+	// print_r($fields);
+
+	// print_r($fields["_attchments"]);
 
 	$result = put_db($fields);
 	if($result) {
-		echo $result;
+		// echo $result;
+		$result = put_attachment($result, $attachment);
+		if ($result) {
+			echo $result;
+		}
 	}
 }
 
