@@ -50,8 +50,6 @@ function put_attachment($result, $attachment) {
 
 	$url = "http://127.0.0.1:5984/tempest_hikes/" . $doc_id . "/" . $attachment_name . "?rev=" . $rev;
 
-	// $data = json_encode($data);
-
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_URL, $url);

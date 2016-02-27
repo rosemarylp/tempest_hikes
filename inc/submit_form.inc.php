@@ -59,28 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		foreach ($list_files as $file) {
 			if(strpos($file, '.') > 0) {
 				$data = file_get_contents($file_path);
-				// $base64_data = base64_encode($data);
-				$data = str_replace(array('\n'), '', $data);
 			}
 		}
 	} else {
 		echo $tmp_name . "<br>" . $upload_dir;
 	}
 
-	// $data = file_get_contents($tmp_name);
-	// $base64_data = base64_encode($data);
-
-	// $attachment = [$file_name];
 	$attachment["name"] = $file_name;
 	$attachment["content-type"] = $_FILES["image_upload"]["type"];
 	$attachment["data"] = $data;
-	// $attachment["name"] = $file_name;
-
-	// $fields["_attachments"] = $attachment;
-
-	// print_r($fields);
-
-	// print_r($fields["_attchments"]);
 
 	$result = put_db($fields);
 	if($result) {
