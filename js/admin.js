@@ -15,9 +15,9 @@ function submit_form() {
 		var file = files[i];
 
 		// Check the file type.
-		if (!file.type.match('image.*')) {
-		    continue;
-		}
+		// if (!file.type.match('image.*')) {
+		    // continue;
+		// }
 
 		// Add the file to the request.
 		formData.append('image_upload', file, file.name);

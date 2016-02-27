@@ -45,20 +45,21 @@ function put_attachment($result, $attachment) {
 	$doc_id = $doc_info["id"];
 	$rev = $doc_info["rev"];
 	$attachment_name = $attachment["name"];
+	$data = $attachment["data"];
+	$content_type = $attachment["content-type"];
 
 	$url = "http://127.0.0.1:5984/tempest_hikes/" . $doc_id . "/" . $attachment_name . "?rev=" . $rev;
 
-	echo $url;
-
-	$data = json_encode($attachment);
+	// $data = json_encode($data);
 
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Content-Length: ' . strlen($data)));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: ' . $content_type,'Content-Length: ' . strlen($data)));
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POST, true);
 
 	$response = curl_exec($ch);
 
@@ -69,7 +70,6 @@ function put_attachment($result, $attachment) {
 
 function get_doc_info($result) {
 	$result = json_decode($result);
-	print_r($result);
 	$rev = $result->rev;
 	$doc_id = $result->id;
 	$doc_info = ["id"=>$doc_id,"rev"=>$rev];
