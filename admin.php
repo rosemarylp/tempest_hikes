@@ -47,6 +47,12 @@
 			<label for="image_upload">Image: </label>
 			<input type="file" name="image_upload" id="image_upload">
 
+			<div id="directions_container">
+				<label for="directions">Driving Directions: </label>
+				<button id="add_button">+</button>
+				<input type="text" name="directions[]" id="directions">
+			</div>
+
 			<input type="submit" name="submit" value="Submit">
 		</form>
 

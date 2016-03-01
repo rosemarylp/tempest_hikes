@@ -15,9 +15,9 @@ function submit_form() {
 		var file = files[i];
 
 		// Check the file type.
-		// if (!file.type.match('image.*')) {
-		    // continue;
-		// }
+		if (!file.type.match('image.*')) {
+		    continue;
+		}
 
 		// Add the file to the request.
 		formData.append('image_upload', file, file.name);
@@ -63,6 +63,12 @@ $(':file').change(function() {
 	else if(file.type != 'image/jpg') {
 		// alert("Invalid file type");
 	}
-})
+});
+
+$('#add_button').click(function() {
+	event.preventDefault();
+	var new_field = "<input type=\"text\" name=\"directions[]\">";
+	$(new_field).appendTo($("#directions_container"));
+});
 
 });

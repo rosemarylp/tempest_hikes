@@ -33,7 +33,9 @@ switch ($view) {
 		break;
 }
 
+
 $result = call_db($url);
+
 echo $result;
 // echo $url;
 

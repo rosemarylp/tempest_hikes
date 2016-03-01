@@ -49,6 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$fields["lng"] = $lng;
 	}
 
+	if (isset($_POST['directions'])) {
+		$directions = $_POST['directions'];
+		$fields["directions"] = $directions;
+	}
+
 	$tmp_name = $_FILES["image_upload"]["tmp_name"];
 	$file_name = basename($_FILES["image_upload"]["name"]);
 	$upload_dir = "../uploads";
