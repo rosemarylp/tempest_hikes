@@ -22,7 +22,6 @@ switch ($view) {
 		$url .= ",\"lng\":";
 		$url .= $lng;
 		$url .= "}";
-		echo $url;
 		break;
 
 	case 'weather':

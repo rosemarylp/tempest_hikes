@@ -46,12 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if (isset($_POST['lat'])) {
 		$lat = $_POST['lat'];
-		$fields["lat"] = $lat;
+		$fields["lat"] = (float)$lat;
 	}
 
 	if (isset($_POST['lng'])) {
 		$lng = $_POST['lng'];
-		$fields["lng"] = $lng;
+		$fields["lng"] = (float)$lng;
 	}
 
 	if (isset($_POST['directions'])) {
