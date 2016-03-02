@@ -19,6 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$fields["area"] = $area;
 	}
 
+	if (isset($_POST["type"])) {
+		$type = $_POST["type"];
+		$fields["type"] = $type;
+	}
+
 	if (isset($_POST['date'])) {
 		$date = $_POST['date'];
 		$fields["date"] = $date;
