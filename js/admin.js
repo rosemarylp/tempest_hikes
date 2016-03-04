@@ -13,6 +13,7 @@ function get_hikes() {
 		for (var i=0; i < data.rows.length; i++) {
 			var lat = data.rows[i].key.lat;
 			var lng = data.rows[i].key.lng;
+			var hike_id = data.rows[i].id;
 
 			var output = "<section class=\"admin_list_item\">";
 			output += "<h3>" + data.rows[i].value.name + "</h3>";
@@ -22,15 +23,16 @@ function get_hikes() {
 			output += "<button class=\"delete\">Delete</button>";
 			output += "</section>";
 			$('#hike_list').append(output);
-			add_handlers(lat, lng);
+			add_handlers(lat, lng, hike_id);
 		} //end for
 
-		function add_handlers(lat, lng) {
+		function add_handlers(lat, lng, hike_id) {
 			var edit_button = $('#hike_list section:last-of-type .edit');
 			var delete_button = $('#hike_list section:last-of-type .delete');
 
 			$(edit_button).click(function() {
 				$('#edit_hike').show();
+				edit_hike(lat, lng, hike_id);
 			});
 
 			$(delete_button).click(function() {
@@ -38,6 +40,42 @@ function get_hikes() {
 			});
 		}
 	})
+}
+
+function edit_hike(lat, lng, hike_id) {
+	var url = "inc/call_db.inc.php?view=full_hike_info&lat=" + lat + "&lng=" + lng;
+	$.ajax({
+		method: "GET",
+		url: url,
+		dataType: 'json'
+	}).done(function(data) {
+		// var edit_form = $('#edit_hike');
+		$('#edit_hike #edit_hike_name').val(data.rows[0].value.name);
+		$('#edit_hike #edit_area').val(data.rows[0].value.area);
+		$('#edit_hike #edit_type').val(data.rows[0].value.type);
+		$('#edit_hike #edit_date').val(data.rows[0].value.date);
+		$('#edit_hike #edit_description').val(data.rows[0].value.description);
+		$('#edit_hike #edit_distance').val(data.rows[0].value.distance);
+		$('#edit_hike #edit_elevation_gain').val(data.rows[0].value.elevation_gain);
+		$('#edit_hike #edit_lat').val(data.rows[0].key.lat);
+		$('#edit_hike #edit_lng').val(data.rows[0].key.lng);
+
+		if(data.rows[0].value.directions.length > 1) {
+			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
+			for (var i=1; i < data.rows[0].value.directions.length; i++) {
+				var new_field = "<input type=\"text\" name=\"directions[]\">";
+				$(new_field).appendTo($("#edit_directions_container"));
+				$('#edit_directions_container input:last-of-type').val(data.rows[0].value.directions[i]);
+			}
+		} else {
+			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
+		}
+
+		for (var j=0; j < data.rows[0].value.attachments.length; j++) {
+			var output = "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
+			$('#image_container').append(output);
+		} //end for
+	});
 }
 
 function submit_form() {
@@ -100,10 +138,14 @@ $(':file').change(function() {
 	}
 });
 
-$('#add_button').click(function() {
+$('#add_button, #edit_add_button').click(function() {
 	event.preventDefault();
 	var new_field = "<input type=\"text\" name=\"directions[]\">";
-	$(new_field).appendTo($("#directions_container"));
+	if ($(this).attr("id") == "add_button") {
+		$(new_field).appendTo($("#directions_container"));
+	} else {
+		$(new_field).appendTo($("#edit_directions_container"));
+	}
 });
 
 get_hikes();
