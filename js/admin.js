@@ -21,6 +21,20 @@ function get_hikes() {
 			output += "<button class=\"delete\">Delete</button>";
 			output += "</section>";
 			$('#hike_list').append(output);
+			add_handlers(lat, lng);
+		} //end for
+
+		function add_handlers(lat, lng) {
+			var edit_button = $('#hike_list section:last-of-type .edit');
+			var delete_button = $('#hike_list section:last-of-type .delete');
+
+			$(edit_button).click(function() {
+				alert("Edit" + lat + lng);
+			});
+
+			$(delete_button).click(function() {
+				alert("Delete" + lat + lng);
+			});
 		}
 	})
 }
