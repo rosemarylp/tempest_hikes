@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-$('#add_hike_form').hide();
+$('#add_hike').hide();
+$('#edit_hike').hide();
 
 function get_hikes() {
 	var url = "inc/call_db.inc.php?view=admin_list";
@@ -29,7 +30,7 @@ function get_hikes() {
 			var delete_button = $('#hike_list section:last-of-type .delete');
 
 			$(edit_button).click(function() {
-				alert("Edit" + lat + lng);
+				$('#edit_hike').show();
 			});
 
 			$(delete_button).click(function() {
@@ -72,6 +73,10 @@ function submit_form() {
 
 	xhr.send(formData);
 }
+
+$('#add_hike_button').click(function() {
+	$('#add_hike').show();
+})
 
 $('#add_hike_form').submit(function() {
 	event.preventDefault();
