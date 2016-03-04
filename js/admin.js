@@ -1,5 +1,30 @@
 $(document).ready(function() {
 
+$('#add_hike_form').hide();
+
+function get_hikes() {
+	var url = "inc/call_db.inc.php?view=admin_list";
+	$.ajax({
+		method: "GET",
+		url: url,
+		dataType: 'json'
+	}).done(function(data) {
+		for (var i=0; i < data.rows.length; i++) {
+			var lat = data.rows[i].key.lat;
+			var lng = data.rows[i].key.lng;
+
+			var output = "<section class=\"admin_list_item\">";
+			output += "<h3>" + data.rows[i].value.name + "</h3>";
+			output += "<h4> Area: </h4>" + data.rows[i].value.area;
+			output += "<h4> Date: </h4>" + data.rows[i].value.date;
+			output += "<button class=\"edit\">Edit</button>";
+			output += "<button class=\"delete\">Delete</button>";
+			output += "</section>";
+			$('#hike_list').append(output);
+		}
+	})
+}
+
 function submit_form() {
 	var form_contents = $('#add_hike_form').serializeArray();
 	// var image_upload = $('#image_upload');
@@ -32,15 +57,6 @@ function submit_form() {
 	xhr.open('POST', url, true);
 
 	xhr.send(formData);
-
-	// var jqxhr = $.post(url,formData,"json").done(function(data) {
-	// 	var response = JSON.parse(data);
-	// 	var message = response.reason;
-	// 	$('#form_message').html(message);
-	// }).fail(function() {
-	// 	var message = "There was an error.";
-	// 	$('#form_message').html(message);
-	// });
 }
 
 $('#add_hike_form').submit(function() {
@@ -71,5 +87,6 @@ $('#add_button').click(function() {
 	$(new_field).appendTo($("#directions_container"));
 });
 
-});
+get_hikes();
 
+});

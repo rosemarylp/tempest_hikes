@@ -28,6 +28,10 @@ switch ($view) {
 		$url = "http://api.wunderground.com/api/" . $weather_key . "/forecast10day/q/" . $lat . "," . $lng . ".json";
 		break;
 
+	case 'admin_list':
+		$url = "http://127.0.0.1:5984/tempest_hikes/_design/admin/_view/admin_list";
+		break;
+
 	default:
 		# code...
 		break;

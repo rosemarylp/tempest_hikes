@@ -15,6 +15,8 @@
 		<!-- Search Bar -->
 	</header>
 	<main>
+
+		<div id="hike_list"></div>
 		<h2>Add Hikes</h2>
 		<form action="#" id="add_hike_form">
 			<label for="hike_name">Hike Name:</label>
