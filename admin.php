@@ -54,9 +54,9 @@
 					<input type="text" name="directions[]" id="edit_directions">
 				</div>
 
-				<div id="image_container">
-					<label for="image_upload">Image: </label>
-					<input type="file" name="image_upload" id="image_upload">
+				<div id="edit_image_container">
+					<label for="edit_image_upload">Image: </label>
+					<input type="file" name="image_upload" id="edit_image_upload">
 				</div>
 
 				<input type="submit" name="submit" value="Submit">

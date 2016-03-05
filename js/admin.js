@@ -49,7 +49,9 @@ function edit_hike(lat, lng, hike_id) {
 		url: url,
 		dataType: 'json'
 	}).done(function(data) {
-		// var edit_form = $('#edit_hike');
+		var hike_id = data.rows[0].id;
+		var rev = data.rows[0].value.rev;
+		// Populate Fields
 		$('#edit_hike #edit_hike_name').val(data.rows[0].value.name);
 		$('#edit_hike #edit_area').val(data.rows[0].value.area);
 		$('#edit_hike #edit_type').val(data.rows[0].value.type);
@@ -71,38 +73,76 @@ function edit_hike(lat, lng, hike_id) {
 			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
 		}
 
-		for (var j=0; j < data.rows[0].value.attachments.length; j++) {
-			var output = "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
-			$('#image_container').append(output);
-		} //end for
+		if(data.rows[0].value.hasOwnProperty("attachments")) {
+			for (var j=0; j < data.rows[0].value.attachments.length; j++) {
+				var output = "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
+				$('#image_container').append(output);
+			} //end for
+		}
+
+		$('#edit_hike_form').submit(function(event) {
+			event.preventDefault();
+			submit_form("edit", hike_id, rev);
+		});
 	});
 }
 
-function submit_form() {
-	var form_contents = $('#add_hike_form').serializeArray();
-	// var image_upload = $('#image_upload');
-	var image_upload = document.getElementById('image_upload');
-	var url = "inc/submit_form.inc.php";
+function submit_form(action, hike_id, rev) {
+	switch(action) {
+		case "edit":
+			var form_contents = $("#edit_hike_form").serializeArray();
+			var image_upload = document.getElementById('edit_image_upload');
+			var url = "inc/submit_form.inc.php?action=edit&id=" + hike_id + "&rev=" + rev;
 
-	var files = image_upload.files;
+			var files = image_upload.files;
 
-	var formData = new FormData();
+			var formData = new FormData();
 
-	for (var i = 0; i < files.length; i++) {
-		//Note: http://blog.teamtreehouse.com/uploading-files-ajax
-		var file = files[i];
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];
 
-		// Check the file type.
-		if (!file.type.match('image.*')) {
-		    continue;
-		}
+				if (!file.type.match('image.*')) {
+					continue;
+				}
 
-		// Add the file to the request.
-		formData.append('image_upload', file, file.name);
-	}
+				formData.append('image_upload', file, file.name);
+			}
 
-	for (var j=0; j < form_contents.length; j++) {
-		formData.append(form_contents[j].name, form_contents[j].value);
+			for (var j=0; j < form_contents.length; j++) {
+				formData.append(form_contents[j].name, form_contents[j].value);
+			}
+
+			formData.append('action', action);
+			formData.append('hike_id', hike_id);
+			formData.append('rev', rev);
+		break;
+
+		case "add":
+			var form_contents = $('#add_hike_form').serializeArray();
+			var image_upload = document.getElementById('image_upload');
+			var url = "inc/submit_form.inc.php";
+
+			var files = image_upload.files;
+
+			var formData = new FormData();
+
+			for (var i = 0; i < files.length; i++) {
+				//Note: http://blog.teamtreehouse.com/uploading-files-ajax
+				var file = files[i];
+
+				// Check the file type.
+				if (!file.type.match('image.*')) {
+				    continue;
+				}
+
+				// Add the file to the request.
+				formData.append('image_upload', file, file.name);
+			}
+
+			for (var j=0; j < form_contents.length; j++) {
+				formData.append(form_contents[j].name, form_contents[j].value);
+			}
+		break;
 	}
 
 	var xhr = new XMLHttpRequest();

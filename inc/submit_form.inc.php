@@ -4,7 +4,7 @@ require_once 'functions.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	echo "<pre>";
-	// print_r($_POST);
+	print_r($_POST);
 	// print_r($_FILES);
 	echo "</pre>";
 	$fields = [];
@@ -59,6 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$fields["directions"] = $directions;
 	}
 
+	if (isset($_POST['action']) && $_POST['action'] == "edit") {
+		if (isset($_POST['hike_id'])) {
+			$id = $_POST['hike_id'];
+		}
+
+		if (isset($_POST['rev'])) {
+			$rev = $_POST['rev'];
+			$fields['_rev'] = $rev;
+		}
+
+	} else {
+		$id = get_id();
+	}
+
+	$url = "http://127.0.0.1:5984/tempest_hikes/" . $id;
+
 	$tmp_name = $_FILES["image_upload"]["tmp_name"];
 	$file_name = basename($_FILES["image_upload"]["name"]);
 	$upload_dir = "../uploads";
@@ -79,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$attachment["content-type"] = $_FILES["image_upload"]["type"];
 	$attachment["data"] = $data;
 
-	$result = put_db($fields);
+	$result = put_db($fields, $url);
 	if($result) {
 		// echo $result;
 		$result = put_attachment($result, $attachment);

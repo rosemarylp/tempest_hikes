@@ -17,11 +17,8 @@ function call_db($url) {
 	return $result;
 }
 
-function put_db($fields) {
+function put_db($fields, $url) {
 	require_once 'connect.inc.php';
-	$id = get_id();
-
-	$url = "http://127.0.0.1:5984/tempest_hikes/" . $id;
 
 	$data = json_encode($fields);
 
