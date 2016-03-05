@@ -14,6 +14,7 @@ function get_hikes() {
 			var lat = data.rows[i].key.lat;
 			var lng = data.rows[i].key.lng;
 			var hike_id = data.rows[i].id;
+			var rev = data.rows[i].value.rev;
 
 			var output = "<section class=\"admin_list_item\">";
 			output += "<h3>" + data.rows[i].value.name + "</h3>";
@@ -23,10 +24,10 @@ function get_hikes() {
 			output += "<button class=\"delete\">Delete</button>";
 			output += "</section>";
 			$('#hike_list').append(output);
-			add_handlers(lat, lng, hike_id);
+			add_handlers(lat, lng, hike_id, rev);
 		} //end for
 
-		function add_handlers(lat, lng, hike_id) {
+		function add_handlers(lat, lng, hike_id, rev) {
 			var edit_button = $('#hike_list section:last-of-type .edit');
 			var delete_button = $('#hike_list section:last-of-type .delete');
 
@@ -36,10 +37,22 @@ function get_hikes() {
 			});
 
 			$(delete_button).click(function() {
-				alert("Delete" + lat + lng);
+				delete_hike(hike_id, rev);
 			});
 		}
 	})
+}
+
+function delete_hike(hike_id, rev) {
+	var url = "inc/delete_hike.inc.php";
+
+	$.ajax({
+		method: "POST",
+		url: url,
+		data: {id: hike_id, rev: rev}
+	}).done(function(data){
+		console.log(data);
+	});
 }
 
 function edit_hike(lat, lng, hike_id) {
