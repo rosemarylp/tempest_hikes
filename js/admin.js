@@ -37,24 +37,27 @@ function get_hikes() {
 			});
 
 			$(delete_button).click(function() {
+				var button = $(this);
 				var delete_ok = confirm("Are you sure you want to delete this hike?");
 				if (delete_ok == true) {
-					delete_hike(hike_id, rev);
+					delete_hike(hike_id, rev, button)
 				}
 			});
 		}
 	})
 }
 
-function delete_hike(hike_id, rev) {
+function delete_hike(hike_id, rev, button) {
 	var url = "inc/delete_hike.inc.php";
 
-	$.ajax({
+	var request = $.ajax({
 		method: "POST",
 		url: url,
 		data: {id: hike_id, rev: rev}
 	}).done(function(data){
 		console.log(data);
+	}).success(function() {
+		$(button).parent().hide();
 	});
 }
 
