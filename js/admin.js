@@ -37,7 +37,10 @@ function get_hikes() {
 			});
 
 			$(delete_button).click(function() {
-				delete_hike(hike_id, rev);
+				var delete_ok = confirm("Are you sure you want to delete this hike?");
+				if (delete_ok == true) {
+					delete_hike(hike_id, rev);
+				}
 			});
 		}
 	})
