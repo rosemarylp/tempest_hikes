@@ -134,6 +134,9 @@ function submit_form(action, hike_id, rev) {
 			formData.append('action', action);
 			formData.append('hike_id', hike_id);
 			formData.append('rev', rev);
+
+			post_to_db(url);
+
 		break;
 
 		case "add":
@@ -161,14 +164,25 @@ function submit_form(action, hike_id, rev) {
 			for (var j=0; j < form_contents.length; j++) {
 				formData.append(form_contents[j].name, form_contents[j].value);
 			}
+
+			post_to_db(url);
+
 		break;
+
+		function post_to_db(url) {
+			var xhr = new XMLHttpRequest();
+
+			xhr.open('POST', url, true);
+
+			xhr.send(formData);
+		}
 	}
 
-	var xhr = new XMLHttpRequest();
+	// var xhr = new XMLHttpRequest();
 
-	xhr.open('POST', url, true);
+	// xhr.open('POST', url, true);
 
-	xhr.send(formData);
+	// xhr.send(formData);
 }
 
 $('#add_hike_button').click(function() {
@@ -177,7 +191,7 @@ $('#add_hike_button').click(function() {
 
 $('#add_hike_form').submit(function() {
 	event.preventDefault();
-	submit_form();
+	submit_form("add");
 });
 
 $(':file').change(function() {
