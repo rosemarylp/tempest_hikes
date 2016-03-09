@@ -75,15 +75,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if (isset($_POST['existing_attachments'])) {
 		//Gets existing attachment data before it's overwritten in doc update
-		$file_name = $_POST['existing_attachments'];
-		$existing_attachment["name"] = $file_name;
+		if (is_array($_POST['existing_attachments'])) {
+			for ($i=0; $i < count($_POST['existing_attachments']); $i++) {
+				$file_name = $_POST['existing_attachments'][$i];
+				$existing_attachment[$i]["name"] = $file_name;
 
-		$file_url = "http://127.0.0.1:5984/tempest_hikes/" . $id . "/" . $file_name;
-		$data = file_get_contents($file_url);
-		$existing_attachment["data"] = $data;
+				$file_url = "http://127.0.0.1:5984/tempest_hikes/" . $id . "/" . $file_name;
+				$data = file_get_contents($file_url);
+				$existing_attachment[$i]["data"] = $data;
 
-		$content_type = pathinfo($file_url, PATHINFO_EXTENSION);
-		$existing_attachment["content-type"] = $content_type;
+				$content_type = pathinfo($file_url, PATHINFO_EXTENSION);
+				$existing_attachment[$i]["content-type"] = $content_type;
+			}
+		} else {
+			$file_name = $_POST['existing_attachments'];
+			$existing_attachment["name"] = $file_name;
+
+			$file_url = "http://127.0.0.1:5984/tempest_hikes/" . $id . "/" . $file_name;
+			$data = file_get_contents($file_url);
+			$existing_attachment["data"] = $data;
+
+			$content_type = pathinfo($file_url, PATHINFO_EXTENSION);
+			$existing_attachment["content-type"] = $content_type;
+		}
 	}
 
 	if (isset($_POST["delete_attachment"])) {
@@ -120,9 +134,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if ($result) {
 			// if there is an existing attachment, re-add it to doc
 			if (isset($existing_attachment)) {
-				// for ($i=0; $i < count($existing_attachments); $i++) {
+				if (is_array($existing_attachment)) {
+					for ($i=0; $i < count($existing_attachment); $i++) {
+						$result = put_attachment($result, $existing_attachment[$i]);
+					}
+				} else {
 					$result = put_attachment($result, $existing_attachment);
-				// }
+				}
 			}
 		}
 	}
