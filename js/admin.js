@@ -130,7 +130,9 @@ function submit_form(action, hike_id, rev, data) {
 			}
 
 			if(data.rows[0].value.hasOwnProperty("attachments")) {
-				formData.append('existing_attachments', data.rows[0].value.attachments);
+				//Send existing attachments with formdata so they aren't overwritten
+				var existing_attachments = data.rows[0].value.attachments;
+				formData.append('existing_attachments', existing_attachments);
 			}
 
 			for (var j=0; j < form_contents.length; j++) {
