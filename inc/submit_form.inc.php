@@ -73,32 +73,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$id = get_id();
 	}
 
-	$url = "http://127.0.0.1:5984/tempest_hikes/" . $id;
+	if (isset($_POST['existing_attachments'])) {
+		//Gets existing attachment data before it's overwritten in doc update
+		$file_name = $_POST['existing_attachments'];
+		$existing_attachment["name"] = $file_name;
 
-	$tmp_name = $_FILES["image_upload"]["tmp_name"];
-	$file_name = basename($_FILES["image_upload"]["name"]);
-	$upload_dir = "../uploads";
+		$file_url = "http://127.0.0.1:5984/tempest_hikes/" . $id . "/" . $file_name;
+		$data = file_get_contents($file_url);
+		$existing_attachment["data"] = $data;
 
-	if(move_uploaded_file($tmp_name, $upload_dir . "/" . $file_name)) {
-		$file_path = $upload_dir . "/" . $file_name;
-		$list_files = scandir($upload_dir);
-		foreach ($list_files as $file) {
-			if(strpos($file, '.') > 0) {
-				$data = file_get_contents($file_path);
-			}
-		}
-	} else {
-		echo $tmp_name . "<br>" . $upload_dir;
+		$content_type = pathinfo($file_url, PATHINFO_EXTENSION);
+		$existing_attachment["content-type"] = $content_type;
 	}
 
-	$attachment["name"] = $file_name;
-	$attachment["content-type"] = $_FILES["image_upload"]["type"];
-	$attachment["data"] = $data;
+	if (isset($_POST["delete_attachment"])) {
+		$delete_attachment = $_POST["delete_attachment"];
+	}
+
+	$url = "http://127.0.0.1:5984/tempest_hikes/" . $id;
+
+	if (!empty($_FILES)) {
+		$tmp_name = $_FILES["image_upload"]["tmp_name"];
+		$file_name = basename($_FILES["image_upload"]["name"]);
+		$upload_dir = "../uploads";
+
+		if(move_uploaded_file($tmp_name, $upload_dir . "/" . $file_name)) {
+			$file_path = $upload_dir . "/" . $file_name;
+			$list_files = scandir($upload_dir);
+			foreach ($list_files as $file) {
+				if(strpos($file, '.') > 0) {
+					$data = file_get_contents($file_path);
+				}
+			}
+		} else {
+			echo $tmp_name . "<br>" . $upload_dir;
+		}
+
+		$attachment["name"] = $file_name;
+		$attachment["content-type"] = $_FILES["image_upload"]["type"];
+		$attachment["data"] = $data;
+	}
 
 	$result = put_db($fields, $url);
-	if($result) {
-		// echo $result;
+	if($result && isset($attachment)) {
 		$result = put_attachment($result, $attachment);
+		if ($result) {
+			// if there is an existing attachment, re-add it to doc
+			if (isset($existing_attachment)) {
+				// for ($i=0; $i < count($existing_attachments); $i++) {
+					$result = put_attachment($result, $existing_attachment);
+				// }
+			}
+		}
+	}
+	if ($result && isset($delete_attachment)) {
+		$result = delete_attachment($result, $delete_attachment);
 		if ($result) {
 			echo $result;
 		}

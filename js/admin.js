@@ -96,18 +96,19 @@ function edit_hike(lat, lng, hike_id) {
 		if(data.rows[0].value.hasOwnProperty("attachments")) {
 			for (var j=0; j < data.rows[0].value.attachments.length; j++) {
 				var output = "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
-				$('#image_container').append(output);
+				output += "<input type=\"checkbox\" name=\"delete_attachment\" value=\"" + data.rows[0].value.attachments[j] + "\">Delete";
+				$('#edit_image_container').append(output);
 			} //end for
 		}
 
 		$('#edit_hike_form').submit(function(event) {
 			event.preventDefault();
-			submit_form("edit", hike_id, rev);
+			submit_form("edit", hike_id, rev, data);
 		});
 	});
 }
 
-function submit_form(action, hike_id, rev) {
+function submit_form(action, hike_id, rev, data) {
 	switch(action) {
 		case "edit":
 			var form_contents = $("#edit_hike_form").serializeArray();
@@ -126,6 +127,10 @@ function submit_form(action, hike_id, rev) {
 				}
 
 				formData.append('image_upload', file, file.name);
+			}
+
+			if(data.rows[0].value.hasOwnProperty("attachments")) {
+				formData.append('existing_attachments', data.rows[0].value.attachments);
 			}
 
 			for (var j=0; j < form_contents.length; j++) {
