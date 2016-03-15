@@ -81,33 +81,40 @@ function delete_attachment($result, $attachment) {
 }
 
 function put_attachment($result, $attachment) {
+	if (is_string($result)) {
+		$result = json_decode($result);
+	}
 	$doc_info = get_doc_info($result);
 	$doc_id = $doc_info["id"];
 	$rev = $doc_info["rev"];
-	$attachment_name = $attachment["name"];
-	$data = $attachment["data"];
-	$content_type = $attachment["content-type"];
 
-	$url = "http://127.0.0.1:5984/tempest_hikes/" . $doc_id . "/" . $attachment_name . "?rev=" . $rev;
+	if(is_array($attachment)) {
+		if (isset($attachment["name"]) && isset($attachment["data"]) && isset($attachment["content-type"])) {
+			$attachment_name = $attachment["name"];
+			$data = $attachment["data"];
+			$content_type = $attachment["content-type"];
 
-	$ch = curl_init();
+			$url = "http://127.0.0.1:5984/tempest_hikes/" . $doc_id . "/" . $attachment_name . "?rev=" . $rev;
 
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: ' . $content_type,'Content-Length: ' . strlen($data)));
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POST, true);
+			$ch = curl_init();
 
-	$response = curl_exec($ch);
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: ' . $content_type,'Content-Length: ' . strlen($data)));
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POST, true);
 
-	return $response;
+			$response = curl_exec($ch);
 
-	curl_close($ch);
+			return $response;
+
+			curl_close($ch);
+		}
+	}
 }
 
 function get_doc_info($result) {
-	$result = json_decode($result);
 	$rev = $result->rev;
 	$doc_id = $result->id;
 	$doc_info = ["id"=>$doc_id,"rev"=>$rev];
