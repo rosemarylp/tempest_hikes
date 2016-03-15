@@ -172,3 +172,19 @@ main {
 		}
 	}
 }
+
+/* ADMIN.PHP */
+
+#edit_directions_container {
+	display: flex;
+	flex-flow: column wrap;
+	width: 80%;
+
+	button {
+		width: 4em;
+	}
+
+	.fa-times-circle {
+		color: $orange;
+	}
+}

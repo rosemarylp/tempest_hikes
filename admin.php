@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="js/admin.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
@@ -51,7 +52,10 @@
 				<div id="edit_directions_container">
 					<label for="edit_directions">Driving Directions: </label>
 					<button id="edit_add_button">+</button>
-					<input type="text" name="directions[]" id="edit_directions">
+					<div class="direction_container">
+						<input type="text" name="directions[]" id="edit_directions">
+						<i class="fa fa-times-circle delete_direction"></i>
+					</div>
 				</div>
 
 				<div id="edit_image_container">

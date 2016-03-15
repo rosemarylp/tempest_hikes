@@ -119,4 +119,14 @@ main {
     #weather span img {
       max-width: 10em; }
 
+/* ADMIN.PHP */
+#edit_directions_container {
+  display: flex;
+  flex-flow: column wrap;
+  width: 80%; }
+  #edit_directions_container button {
+    width: 4em; }
+  #edit_directions_container .fa-times-circle {
+    color: #D36000; }
+
 /*# sourceMappingURL=style.css.map */
