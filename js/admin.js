@@ -87,7 +87,7 @@ function edit_hike(lat, lng, hike_id) {
 			for (var i=1; i < data.rows[0].value.directions.length; i++) {
 				var new_field = "<div class=\"direction_container\">";
 				new_field += "<input type=\"text\" name=\"directions[]\">";
-				new_field += "<i class=\"fa fa-times-circle\"></i>";
+				new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
 				new_field += "</div>";
 				$(new_field).appendTo($("#edit_directions_container"));
 				$('#edit_directions_container .direction_container:last-of-type input').val(data.rows[0].value.directions[i]);
@@ -95,6 +95,8 @@ function edit_hike(lat, lng, hike_id) {
 		} else {
 			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
 		}
+
+		delete_direction_handler();
 
 		if(data.rows[0].value.hasOwnProperty("attachments")) {
 			for (var j=0; j < data.rows[0].value.attachments.length; j++) {
@@ -239,18 +241,24 @@ $('#add_button, #edit_add_button').click(function() {
 	event.preventDefault();
 	var new_field = "<div class=\"direction_container\">";
 	new_field += "<input type=\"text\" name=\"directions[]\">";
-	new_field += "<i class=\"fa fa-times-circle\"></i>";
+	new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
 	new_field += "</div>";
 	if ($(this).attr("id") == "add_button") {
 		$(new_field).appendTo($("#directions_container"));
 	} else {
 		$(new_field).appendTo($("#edit_directions_container"));
 	}
+
+	delete_direction_handler();
 });
 
-$('.delete_direction').click(function() {
-	$(this).parent().remove();
-});
+function delete_direction_handler() {
+	$('.delete_direction').click(function() {
+		$(this).parent().remove();
+	});
+}
+
+
 
 get_hikes();
 
