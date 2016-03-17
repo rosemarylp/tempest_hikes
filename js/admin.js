@@ -1,6 +1,19 @@
 $(document).ready(function() {
 
 //FUNCTIONS
+function delete_hike(hike_id, rev, button) {
+	var url = "inc/delete_hike.inc.php";
+
+	var request = $.ajax({
+		method: "POST",
+		url: url,
+		data: {id: hike_id, rev: rev}
+	}).done(function(data){
+		console.log(data);
+	}).success(function() {
+		$(button).parent().hide();
+	});
+}
 
 function add_handlers(lat, lng, hike_id, rev) {
 	var edit_button = $('#hike_list section:last-of-type .edit');

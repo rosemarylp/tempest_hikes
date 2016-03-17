@@ -3,10 +3,6 @@
 require_once 'functions.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	echo "<pre>";
-	print_r($_POST);
-	// print_r($_FILES);
-	echo "</pre>";
 	$fields = [];
 
 	if (isset($_POST['hike_name'])) {
@@ -124,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 
 	$result = put_db($fields, $url);
-	if($result) {
-		 if (isset($attachment)) {
+	if ($result) {
+		if (isset($attachment)) {
 			$result = put_attachment($result, $attachment);
 		}
 

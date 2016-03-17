@@ -41,6 +41,5 @@ switch ($view) {
 $result = call_db($url);
 
 echo $result;
-// echo $url;
 
  ?>

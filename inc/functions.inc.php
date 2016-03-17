@@ -57,33 +57,7 @@ function delete_db($url) {
 	curl_close($ch);
 }
 
-function delete_attachment($result, $attachment) {
-	$doc_info = get_doc_info($result);
-	$doc_id = $doc_info["id"];
-	$rev = $doc_info["rev"];
-	$url = "http://127.0.0.1:5984/tempest_hikes/" . $doc_id . "/" . $attachment_name . "?rev=" . $rev;
-
-	$ch = curl_init();
-
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-		'Content-type: application/json',
-		'Accept: */*')
-	);
-
-	$response = curl_exec($ch);
-
-	echo $response;
-
-	curl_close($ch);
-}
-
 function put_attachment($result, $attachment) {
-	if (is_string($result)) {
-		$result = json_decode($result);
-	}
 	$doc_info = get_doc_info($result);
 	$doc_id = $doc_info["id"];
 	$rev = $doc_info["rev"];
