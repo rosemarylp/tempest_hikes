@@ -98,8 +98,9 @@ function edit_hike(lat, lng, hike_id) {
 
 		if(data.rows[0].value.hasOwnProperty("attachments")) {
 			for (var j=0; j < data.rows[0].value.attachments.length; j++) {
-				var output = "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
-				output += "<input type=\"checkbox\" name=\"delete_attachment[]\" value=\"" + data.rows[0].value.attachments[j] + "\">Delete";
+				var output = "<div><img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
+				output += "<div class=\"checkbox-container\"><input type=\"checkbox\" name=\"delete_attachment[]\" id=\"" + data.rows[0].value.attachments[j] + "\" value=\"" + data.rows[0].value.attachments[j] + "\">";
+				output += "<label for=\"" + data.rows[0].value.attachments[j] + "\"> <i class=\"fa fa-times-circle\"></i></label></div></div>";
 				$('#edit_image_container').append(output);
 			} //end for
 		}

@@ -141,10 +141,10 @@ form {
   form label {
     display: flex;
     font-weight: bold; }
-  form input[type="submit"] {
+  form input[type=submit] {
     font-weight: bold;
     font-family: "Roboto Condensed", serif; }
-    form input[type="submit"]:hover {
+    form input[type=submit]:hover {
       background-color: #4b684b;
       color: #E2EAE2;
       border: none;
@@ -152,6 +152,30 @@ form {
       font-family: "Roboto Condensed", serif;
       padding: .7em;
       font-size: 1em; }
+
+#edit_image_container div {
+  position: relative; }
+#edit_image_container .checkbox-container {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0; }
+  #edit_image_container .checkbox-container label {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    font-size: 2em;
+    top: 0;
+    z-index: 10;
+    transition: color .3s ease; }
+    #edit_image_container .checkbox-container label:hover {
+      color: #D36000; }
+  #edit_image_container .checkbox-container input[type=checkbox] {
+    visibility: hidden; }
+    #edit_image_container .checkbox-container input[type=checkbox]:checked + label {
+      color: #D36000; }
 
 #edit_directions_container, #directions_container {
   display: flex;

@@ -59,8 +59,11 @@
 				</div>
 
 				<div id="edit_image_container">
-					<label for="edit_image_upload">Image: </label>
-					<input type="file" name="image_upload" id="edit_image_upload">
+					<div>
+						<label for="edit_image_upload">Image: </label>
+						<input type="file" name="image_upload" id="edit_image_upload">
+					</div>
+
 				</div>
 
 				<input type="submit" name="submit" value="Submit">

@@ -213,7 +213,7 @@ form {
 		font-weight: bold;
 	}
 
-	input[type="submit"] {
+	input[type=submit] {
 		font-weight: bold;
 		font-family: $heading;
 
@@ -221,6 +221,43 @@ form {
 			@include button-dark;
 			padding: .7em;
 			font-size: 1em;
+		}
+	}
+}
+
+#edit_image_container {
+	div {
+		position: relative;
+	}
+
+	.checkbox-container {
+		width: 1em;
+		height: 1em;
+		position: relative;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		label {
+			position: absolute;
+			width: 2em;
+			height: 2em;
+			font-size: 2em;
+			top: 0;
+			z-index: 10;
+			transition: color .3s ease;
+
+			&:hover {
+				color: $orange;
+			}
+		}
+
+		input[type=checkbox] {
+			visibility: hidden;
+
+			&:checked + label {
+				color: $orange;
+			}
 		}
 	}
 }
