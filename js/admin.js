@@ -33,7 +33,8 @@ function get_hikes() {
 
 			$(edit_button).click(function() {
 				$('#hike_list').html('');
-				$('#edit_hike').show();
+				$('#add_hike_button').hide();
+				$('#edit_hike, #back_button').show();
 				edit_hike(lat, lng, hike_id);
 			});
 
@@ -212,7 +213,8 @@ function submit_form(action, hike_id, rev, data) {
 
 $('#add_hike_button').click(function() {
 	$('#hike_list').html('');
-	$('#add_hike').show();
+	$('#add_hike_button').hide();
+	$('#add_hike, #back_button').show();
 })
 
 $('#add_hike_form').submit(function() {
@@ -250,6 +252,13 @@ $('#add_button, #edit_add_button').click(function() {
 	}
 
 	delete_direction_handler();
+});
+
+$('#back_button').click(function() {
+	$('#add_hike, #edit_hike').hide();
+	$('#back_button').hide();
+	$('#add_hike_button').show();
+	get_hikes();
 });
 
 function delete_direction_handler() {

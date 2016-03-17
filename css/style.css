@@ -120,6 +120,9 @@ main {
       max-width: 10em; }
 
 /* ADMIN.PHP */
+#back_button {
+  display: none; }
+
 form {
   display: flex;
   flex-flow: column wrap;

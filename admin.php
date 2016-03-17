@@ -17,6 +17,7 @@
 	</header>
 	<main>
 		<button id="add_hike_button">Add Hike</button>
+		<button id="back_button"><i class="fa fa-arrow-circle-left"></i> Back</button>
 		<div id="hike_list"></div>
 
 		<section id="edit_hike">

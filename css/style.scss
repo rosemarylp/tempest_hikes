@@ -179,6 +179,10 @@ main {
 
 /* ADMIN.PHP */
 
+#back_button {
+	display: none;
+}
+
 form {
 	display: flex;
 	flex-flow: column wrap;
