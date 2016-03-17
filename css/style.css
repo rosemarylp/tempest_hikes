@@ -53,7 +53,12 @@ button {
   color: #E2EAE2;
   border: none;
   padding: .3em 1em;
-  font-family: "Roboto Condensed", serif; }
+  font-family: "Roboto Condensed", serif;
+  transition: background .2s ease, color .2s ease; }
+  button:hover {
+    background: #c4d5c4;
+    color: #2E352E;
+    transition: background .2s ease, color .2s ease; }
 
 main {
   padding: 1em; }
@@ -77,7 +82,15 @@ main {
     max-height: 15em; }
   #hike_summary button {
     background: #c4d5c4;
-    color: #2E352E; }
+    color: #2E352E;
+    transition: background .2s ease, color .2s ease; }
+    #hike_summary button:hover {
+      background-color: #4b684b;
+      color: #E2EAE2;
+      border: none;
+      padding: .3em 1em;
+      font-family: "Roboto Condensed", serif;
+      transition: background .2s ease, color .2s ease; }
   @media screen and (max-width: 800px) {
     #hike_summary {
       flex-flow: column wrap; }
@@ -153,6 +166,7 @@ form {
       border: none;
       padding: .3em 1em;
       font-family: "Roboto Condensed", serif;
+      transition: background .2s ease, color .2s ease;
       padding: .7em;
       font-size: 1em; }
 

@@ -18,6 +18,13 @@ $breakpoint: 800px;
 	border: none;
 	padding: .3em 1em;
 	font-family: $heading;
+	transition: background .2s ease, color .2s ease;
+}
+
+@mixin button-light {
+	background: darken($lightest-green,10%);
+	color: $dark-gray;
+	transition: background .2s ease, color .2s ease;
 }
 
 *, *:before, *:after {
@@ -81,6 +88,10 @@ h6 {
 
 button {
 	@include button-dark;
+
+	&:hover {
+		@include button-light;
+	}
 }
 
 main {
@@ -111,8 +122,11 @@ main {
 	}
 
 	button {
-		background: darken($lightest-green,10%);
-		color: $dark-gray;
+		@include button-light;
+
+		&:hover {
+			@include button-dark;
+		}
 	}
 
 	@media screen and (max-width: $breakpoint) {
