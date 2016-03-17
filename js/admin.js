@@ -1,7 +1,27 @@
 $(document).ready(function() {
 
-$('#add_hike').hide();
-$('#edit_hike').hide();
+//FUNCTIONS
+
+function add_handlers(lat, lng, hike_id, rev) {
+	var edit_button = $('#hike_list section:last-of-type .edit');
+	var delete_button = $('#hike_list section:last-of-type .delete');
+
+	$(edit_button).click(function() {
+		$('#hike_list').fadeOut();
+		$('#hike_list').html('');
+		$('#add_hike_button').hide();
+		$('#edit_hike, #back_button').fadeIn();
+		edit_hike(lat, lng, hike_id);
+	});
+
+	$(delete_button).click(function() {
+		var button = $(this);
+		var delete_ok = confirm("Are you sure you want to delete this hike?");
+		if (delete_ok == true) {
+			delete_hike(hike_id, rev, button)
+		}
+	});
+}
 
 function get_hikes() {
 	var url = "inc/call_db.inc.php?view=admin_list";
@@ -26,42 +46,27 @@ function get_hikes() {
 			$('#hike_list').append(output);
 			add_handlers(lat, lng, hike_id, rev);
 		} //end for
-
-		function add_handlers(lat, lng, hike_id, rev) {
-			var edit_button = $('#hike_list section:last-of-type .edit');
-			var delete_button = $('#hike_list section:last-of-type .delete');
-
-			$(edit_button).click(function() {
-				$('#hike_list').fadeOut();
-				$('#hike_list').html('');
-				$('#add_hike_button').hide();
-				$('#edit_hike, #back_button').fadeIn();
-				edit_hike(lat, lng, hike_id);
-			});
-
-			$(delete_button).click(function() {
-				var button = $(this);
-				var delete_ok = confirm("Are you sure you want to delete this hike?");
-				if (delete_ok == true) {
-					delete_hike(hike_id, rev, button)
-				}
-			});
-		}
 	})
 }
 
-function delete_hike(hike_id, rev, button) {
-	var url = "inc/delete_hike.inc.php";
+function output_directions(directions_array) {
+	for (var i=1; i < directions_array.length; i++) {
+		var new_field = "<div class=\"direction_container\">";
+		new_field += "<input type=\"text\" name=\"directions[]\"> ";
+		new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
+		new_field += "</div>";
+		$(new_field).appendTo($("#edit_directions_container"));
+		$('#edit_directions_container .direction_container:last-of-type input').val(directions_array[i]);
+	}
+}
 
-	var request = $.ajax({
-		method: "POST",
-		url: url,
-		data: {id: hike_id, rev: rev}
-	}).done(function(data){
-		console.log(data);
-	}).success(function() {
-		$(button).parent().hide();
-	});
+function output_attachments(attachment_array, data) {
+	for (var j=0; j < attachment_array.length; j++) {
+		var output = "<div><img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + attachment_array[j] + "\" height=200>";
+		output += "<div class=\"checkbox-container\"><input type=\"checkbox\" name=\"delete_attachment[]\" id=\"" + attachment_array[j] + "\" value=\"" + attachment_array[j] + "\">";
+		output += "<label for=\"" + attachment_array[j] + "\"> <i class=\"fa fa-times-circle\"></i></label></div></div>";
+		$('#edit_image_container').append(output);
+	} //end for
 }
 
 function edit_hike(lat, lng, hike_id) {
@@ -86,14 +91,7 @@ function edit_hike(lat, lng, hike_id) {
 
 		if(data.rows[0].value.directions.length > 1) {
 			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
-			for (var i=1; i < data.rows[0].value.directions.length; i++) {
-				var new_field = "<div class=\"direction_container\">";
-				new_field += "<input type=\"text\" name=\"directions[]\"> ";
-				new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
-				new_field += "</div>";
-				$(new_field).appendTo($("#edit_directions_container"));
-				$('#edit_directions_container .direction_container:last-of-type input').val(data.rows[0].value.directions[i]);
-			}
+			output_directions(data.rows[0].value.directions);
 		} else {
 			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
 		}
@@ -101,12 +99,7 @@ function edit_hike(lat, lng, hike_id) {
 		delete_direction_handler();
 
 		if(data.rows[0].value.hasOwnProperty("attachments")) {
-			for (var j=0; j < data.rows[0].value.attachments.length; j++) {
-				var output = "<div><img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + data.rows[0].value.attachments[j] + "\" height=200>";
-				output += "<div class=\"checkbox-container\"><input type=\"checkbox\" name=\"delete_attachment[]\" id=\"" + data.rows[0].value.attachments[j] + "\" value=\"" + data.rows[0].value.attachments[j] + "\">";
-				output += "<label for=\"" + data.rows[0].value.attachments[j] + "\"> <i class=\"fa fa-times-circle\"></i></label></div></div>";
-				$('#edit_image_container').append(output);
-			} //end for
+			output_attachments(data.rows[0].value.attachments, data);
 		}
 
 		$('#edit_hike_form').submit(function(event) {
@@ -114,6 +107,26 @@ function edit_hike(lat, lng, hike_id) {
 			submit_form("edit", hike_id, rev, data);
 		});
 	});
+}
+
+function post_to_db(url, formData, form) {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('POST', url, true);
+
+	xhr.send(formData);
+
+	xhr.onreadystatechange = function() {
+		if (this.readyState === 4) {
+			if (this.status === 200) {
+				$(form).fadeOut();
+				get_hikes();
+				$('#hike_list').fadeIn();
+				$('#add_hike_button').fadeIn();
+				$('#back_button').hide();
+			}
+		}
+	}
 }
 
 function submit_form(action, hike_id, rev, data) {
@@ -159,7 +172,7 @@ function submit_form(action, hike_id, rev, data) {
 			formData.append('hike_id', hike_id);
 			formData.append('rev', rev);
 
-			post_to_db(url, '#edit_hike');
+			post_to_db(url, formData, '#edit_hike');
 
 		break;
 
@@ -189,31 +202,19 @@ function submit_form(action, hike_id, rev, data) {
 				formData.append(form_contents[j].name, form_contents[j].value);
 			}
 
-			post_to_db(url, '#add_hike');
+			post_to_db(url, formData, '#add_hike');
 
 		break;
-
-		function post_to_db(url, form) {
-			var xhr = new XMLHttpRequest();
-
-			xhr.open('POST', url, true);
-
-			xhr.send(formData);
-
-			xhr.onreadystatechange = function() {
-				if (this.readyState === 4) {
-					if (this.status === 200) {
-						$(form).fadeOut();
-						get_hikes();
-						$('#hike_list').fadeIn();
-						$('#add_hike_button').fadeIn();
-						$('#back_button').hide();
-					}
-				}
-			}
-		}
 	}
 }
+
+function delete_direction_handler() {
+	$('.delete_direction').click(function() {
+		$(this).parent().remove();
+	});
+}
+
+//EVENT LISTENERS
 
 $('#add_hike_button').click(function() {
 	$('#hike_list').fadeOut();
@@ -267,13 +268,8 @@ $('#back_button').click(function() {
 	$('#hike_list').fadeIn();
 });
 
-function delete_direction_handler() {
-	$('.delete_direction').click(function() {
-		$(this).parent().remove();
-	});
-}
-
-
+$('#add_hike').hide();
+$('#edit_hike').hide();
 
 get_hikes();
 
