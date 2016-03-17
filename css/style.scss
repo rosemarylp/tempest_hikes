@@ -12,6 +12,14 @@ $heading: "Roboto Condensed", serif;
 
 $breakpoint: 800px;
 
+@mixin button-dark {
+	background-color: darken($lightest-green,55%);
+	color: $lightest-green;
+	border: none;
+	padding: .3em 1em;
+	font-family: $heading;
+}
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -72,11 +80,7 @@ h6 {
 }
 
 button {
-	background-color: darken($lightest-green,55%);
-	color: $lightest-green;
-	border: none;
-	padding: .3em 1em;
-	font-family: $heading;
+	@include button-dark;
 }
 
 main {
@@ -175,13 +179,64 @@ main {
 
 /* ADMIN.PHP */
 
-#edit_directions_container {
+form {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+	width: 80%;
+
+	.input-half {
+		// width: 50%;
+	}
+
+	input {
+		width: 100%;
+		min-width: 15em;
+		max-width: 20em;
+		padding: .5em;
+		margin-bottom: 1em;
+	}
+
+	div {
+		width: 100%;
+	}
+
+	textarea {
+		width: 100%;
+		max-width: 30em;
+		min-height: 10em;
+		margin-bottom: 1em;
+	}
+
+	label {
+		display: flex;
+		font-weight: bold;
+	}
+
+	input[type="submit"] {
+		font-weight: bold;
+		font-family: $heading;
+
+		&:hover {
+			@include button-dark;
+			padding: .7em;
+			font-size: 1em;
+		}
+	}
+}
+
+#edit_directions_container, #directions_container {
 	display: flex;
 	flex-flow: column wrap;
 	width: 80%;
 
+	label {
+		display: inline-flex;
+	}
+
 	button {
-		width: 4em;
+		width: 3em;
+		margin-bottom: .5em;
 	}
 
 	.fa-times-circle {

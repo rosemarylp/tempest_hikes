@@ -70,41 +70,59 @@
 		<section id="add_hike">
 			<h2>Add Hikes</h2>
 			<form action="#" id="add_hike_form">
-				<label for="hike_name">Hike Name:</label>
-				<input type="text" name="hike_name" id="hike_name" >
+				<div>
+					<label for="hike_name">Hike Name:</label>
+					<input type="text" name="hike_name" id="hike_name" >
+				</div>
 
-				<label for="area">Area:</label>
-				<input type="text" name="area" id="area" >
+				<div>
+					<label for="area">Area:</label>
+					<input type="text" name="area" id="area" >
+				</div>
 
-				<label for="type">Type:</label>
-				<input type="text" name="type" id="type" >
+				<div>
+					<label for="type">Type:</label>
+					<input type="text" name="type" id="type">
+				</div>
 
-				<label for="date">Date Hiked: </label>
-				<input type="date" name="date" id="date" >
+				<div>
+					<label for="date">Date Hiked: </label>
+					<input type="date" name="date" id="date">
+				</div>
 
-				<label for="description">Description:</label>
-				<textarea name="description" id="description" cols="30" rows="10" ></textarea>
+				<div>
+					<label for="distance">Distance:</label>
+					<input type="number" min=".1" max="50" step=".1" name="distance" id="distance">
+				</div>
 
-				<label for="distance">Distance:</label>
-				<input type="number" min=".1" max="50" step=".1" name="distance" id="distance" >
+				<div>
+					<label for="elevation_gain">Elevation Gain:</label>
+					<input type="number" min=".1" max="15000" step=".1" name="elevation_gain" id="elevation_gain">
+				</div>
 
-				<label for="elevation_gain">Elevation Gain:</label>
-				<input type="number" min=".1" max="15000" step=".1" name="elevation_gain" id="elevation_gain" >
+				<div>
+					<label for="lat">Lat:</label>
+					<input type="number" min="-90" max="90" step=".000000001" name="lat" id="lat">
+				</div>
 
-				<label for="lat">Lat:</label>
-				<input type="number" min="-90" max="90" step=".000000001" name="lat" id="lat" >
+				<div>
+					<label for="lng">Lng:</label>
+					<input type="number" min="-180" max="180" step=".0000000001" name="lng" id="lng">
+				</div>
 
-				<label for="lng">Lng:</label>
-				<input type="number" min="-180" max="180" step=".0000000001" name="lng" id="lng" >
+				<div>
+					<label for="description">Description:</label>
+					<textarea name="description" id="description"></textarea>
+				</div>
+
+				<div id="directions_container">
+					<span><label for="directions">Driving Directions: </label>
+					<button id="add_button">+</button></span>
+					<input type="text" name="directions[]" id="directions">
+				</div>
 
 				<label for="image_upload">Image: </label>
 				<input type="file" name="image_upload" id="image_upload">
-
-				<div id="directions_container">
-					<label for="directions">Driving Directions: </label>
-					<button id="add_button">+</button>
-					<input type="text" name="directions[]" id="directions">
-				</div>
 
 				<input type="submit" name="submit" value="Submit">
 			</form>

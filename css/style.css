@@ -120,13 +120,49 @@ main {
       max-width: 10em; }
 
 /* ADMIN.PHP */
-#edit_directions_container {
+form {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  width: 80%; }
+  form input {
+    width: 100%;
+    min-width: 15em;
+    max-width: 20em;
+    padding: .5em;
+    margin-bottom: 1em; }
+  form div {
+    width: 100%; }
+  form textarea {
+    width: 100%;
+    max-width: 30em;
+    min-height: 10em;
+    margin-bottom: 1em; }
+  form label {
+    display: flex;
+    font-weight: bold; }
+  form input[type="submit"] {
+    font-weight: bold;
+    font-family: "Roboto Condensed", serif; }
+    form input[type="submit"]:hover {
+      background-color: #4b684b;
+      color: #E2EAE2;
+      border: none;
+      padding: .3em 1em;
+      font-family: "Roboto Condensed", serif;
+      padding: .7em;
+      font-size: 1em; }
+
+#edit_directions_container, #directions_container {
   display: flex;
   flex-flow: column wrap;
   width: 80%; }
-  #edit_directions_container button {
-    width: 4em; }
-  #edit_directions_container .fa-times-circle {
+  #edit_directions_container label, #directions_container label {
+    display: inline-flex; }
+  #edit_directions_container button, #directions_container button {
+    width: 3em;
+    margin-bottom: .5em; }
+  #edit_directions_container .fa-times-circle, #directions_container .fa-times-circle {
     color: #D36000; }
 
 /*# sourceMappingURL=style.css.map */
