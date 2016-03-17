@@ -32,9 +32,10 @@ function get_hikes() {
 			var delete_button = $('#hike_list section:last-of-type .delete');
 
 			$(edit_button).click(function() {
+				$('#hike_list').fadeOut();
 				$('#hike_list').html('');
 				$('#add_hike_button').hide();
-				$('#edit_hike, #back_button').show();
+				$('#edit_hike, #back_button').fadeIn();
 				edit_hike(lat, lng, hike_id);
 			});
 
@@ -87,7 +88,7 @@ function edit_hike(lat, lng, hike_id) {
 			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
 			for (var i=1; i < data.rows[0].value.directions.length; i++) {
 				var new_field = "<div class=\"direction_container\">";
-				new_field += "<input type=\"text\" name=\"directions[]\">";
+				new_field += "<input type=\"text\" name=\"directions[]\"> ";
 				new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
 				new_field += "</div>";
 				$(new_field).appendTo($("#edit_directions_container"));
@@ -202,8 +203,11 @@ function submit_form(action, hike_id, rev, data) {
 			xhr.onreadystatechange = function() {
 				if (this.readyState === 4) {
 					if (this.status === 200) {
-						$(form).hide();
+						$(form).fadeOut();
 						get_hikes();
+						$('#hike_list').fadeIn();
+						$('#add_hike_button').fadeIn();
+						$('#back_button').hide();
 					}
 				}
 			}
@@ -212,9 +216,10 @@ function submit_form(action, hike_id, rev, data) {
 }
 
 $('#add_hike_button').click(function() {
+	$('#hike_list').fadeOut();
 	$('#hike_list').html('');
 	$('#add_hike_button').hide();
-	$('#add_hike, #back_button').show();
+	$('#add_hike, #back_button').fadeIn();
 })
 
 $('#add_hike_form').submit(function() {
@@ -259,6 +264,7 @@ $('#back_button').click(function() {
 	$('#back_button').hide();
 	$('#add_hike_button').show();
 	get_hikes();
+	$('#hike_list').fadeIn();
 });
 
 function delete_direction_handler() {

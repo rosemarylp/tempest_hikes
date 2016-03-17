@@ -32,9 +32,9 @@ $(document).ready(function() {
 			url: url,
 			dataType: 'json'
 		}).done(function(data) {
-			$('#map').hide();
-			$('#hike_feed').hide();
-			$('#hike_summary').hide();
+			$('#map').fadeOut();
+			$('#hike_feed').fadeOut();
+			$('#hike_summary').fadeOut();
 			var output = "<h3>" + data.rows[0].value.name + "</h3>";
 			output += "<h4>Area: </h4>" + data.rows[0].value.area;
 			output += "<h4>Distance: </h4>" + data.rows[0].value.distance + "mi.";
@@ -56,11 +56,11 @@ $(document).ready(function() {
 			output += "<button id=\"close\">Close</button>";
 			$('#full_hike_info').html(output);
 			get_weather(lat,lng);
-			$('#full_hike_info').show();
+			$('#full_hike_info').fadeIn();
 			$('#close').click(function() {
-				$('#full_hike_info').hide();
-				$('#map').show();
-				$('#hike_feed').show();
+				$('#full_hike_info').fadeOut();
+				$('#map').fadeIn();
+				$('#hike_feed').fadeIn();
 			});
 		});
 	} //end get_full_info
@@ -100,8 +100,8 @@ $(document).ready(function() {
 							output += "<p>" + data.rows[j].value.description + "...</p></div>";
 							output += "<img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[j].id + "/" + data.rows[j].value.image + "\" height=200>";
 							output += "<button>More</button>";
-							$('#hike_summary').show();
 							$('#hike_summary').html(output);
+							$('#hike_summary').fadeIn();
 							$('#hike_summary button').click(function() {
 								get_full_info(this_lat, this_lng);
 							});
@@ -148,6 +148,7 @@ $(document).ready(function() {
 			});
 		}
 
+	$('#hike_summary').hide();
 	get_hike_summaries();
 	get_hike_feed();
 });
