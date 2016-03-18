@@ -70,24 +70,19 @@ function output_directions(directions_array) {
 	output += "</div>";
 
 	$('#edit_directions_container').append(output);
-	// $('#edit_hike #edit_directions').val(directions_array[0]);
 
-	// if (directions_array.length > 1) {
-		for (var i=0; i < directions_array.length; i++) {
-			
-			$('#edit_directions_container .direction_container:last-of-type input').val(directions_array[i]);
-			console.log(i + " " + directions_array[i]);
+	for (var i=0; i < directions_array.length; i++) {
 
-			if (i < directions_array.length -1) {
-				var new_field = "<div class=\"direction_container\">";
-				new_field += "<input type=\"text\" name=\"directions[]\"> ";
-				new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
-				new_field += "</div>";
-				$(new_field).appendTo($("#edit_directions_container"));
-			}
-			
+		$('#edit_directions_container .direction_container:last-of-type input').val(directions_array[i]);
+
+		if (i < directions_array.length -1) {
+			var new_field = "<div class=\"direction_container\">";
+			new_field += "<input type=\"text\" name=\"directions[]\"> ";
+			new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
+			new_field += "</div>";
+			$(new_field).appendTo($("#edit_directions_container"));
 		}
-	// }
+	}
 }
 
 function output_attachments(attachment_array, data) {
@@ -119,11 +114,7 @@ function edit_hike(lat, lng, hike_id) {
 		$('#edit_hike #edit_lat').val(data.rows[0].key.lat);
 		$('#edit_hike #edit_lng').val(data.rows[0].key.lng);
 
-		// if(data.rows[0].value.directions.length > 1) {
-			output_directions(data.rows[0].value.directions);
-		// } else {
-		// 	$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
-		// }
+		output_directions(data.rows[0].value.directions);
 
 		delete_direction_handler();
 
