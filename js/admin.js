@@ -63,19 +63,36 @@ function get_hikes() {
 }
 
 function output_directions(directions_array) {
-	for (var i=1; i < directions_array.length; i++) {
-		var new_field = "<div class=\"direction_container\">";
-		new_field += "<input type=\"text\" name=\"directions[]\"> ";
-		new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
-		new_field += "</div>";
-		$(new_field).appendTo($("#edit_directions_container"));
-		$('#edit_directions_container .direction_container:last-of-type input').val(directions_array[i]);
-	}
+	var output = "<div class=\"direction_container\">";
+	output += "<input type=\"text\" name=\"directions[]\"";
+	output += "id=\"edit_directions\">";
+	output += "<i class=\"fa fa-times-circle delete_direction\"></i>";
+	output += "</div>";
+
+	$('#edit_directions_container').append(output);
+	// $('#edit_hike #edit_directions').val(directions_array[0]);
+
+	// if (directions_array.length > 1) {
+		for (var i=0; i < directions_array.length; i++) {
+			
+			$('#edit_directions_container .direction_container:last-of-type input').val(directions_array[i]);
+			console.log(i + " " + directions_array[i]);
+
+			if (i < directions_array.length -1) {
+				var new_field = "<div class=\"direction_container\">";
+				new_field += "<input type=\"text\" name=\"directions[]\"> ";
+				new_field += "<i class=\"fa fa-times-circle delete_direction\"></i>";
+				new_field += "</div>";
+				$(new_field).appendTo($("#edit_directions_container"));
+			}
+			
+		}
+	// }
 }
 
 function output_attachments(attachment_array, data) {
 	for (var j=0; j < attachment_array.length; j++) {
-		var output = "<div><img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + attachment_array[j] + "\" height=200>";
+		var output = "<div class=\"image-container\"><img src=\"http://127.0.0.1:5984/tempest_hikes/" + data.rows[0].id + "/" + attachment_array[j] + "\" height=200>";
 		output += "<div class=\"checkbox-container\"><input type=\"checkbox\" name=\"delete_attachment[]\" id=\"" + attachment_array[j] + "\" value=\"" + attachment_array[j] + "\">";
 		output += "<label for=\"" + attachment_array[j] + "\"> <i class=\"fa fa-times-circle\"></i></label></div></div>";
 		$('#edit_image_container').append(output);
@@ -102,12 +119,11 @@ function edit_hike(lat, lng, hike_id) {
 		$('#edit_hike #edit_lat').val(data.rows[0].key.lat);
 		$('#edit_hike #edit_lng').val(data.rows[0].key.lng);
 
-		if(data.rows[0].value.directions.length > 1) {
-			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
+		// if(data.rows[0].value.directions.length > 1) {
 			output_directions(data.rows[0].value.directions);
-		} else {
-			$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
-		}
+		// } else {
+		// 	$('#edit_hike #edit_directions').val(data.rows[0].value.directions[0]);
+		// }
 
 		delete_direction_handler();
 
@@ -122,6 +138,18 @@ function edit_hike(lat, lng, hike_id) {
 	});
 }
 
+function clear_form(form) {
+	$(form + " input[type=text], " + form + " input[type=number], " + form + " input[type=date]").each(function() {
+		$(this).val('');
+	});
+
+	$(form + " textarea").val('');
+
+	$('.image-container').remove();
+
+	$('#edit_directions_container div').remove();
+}
+
 function post_to_db(url, formData, form) {
 	var xhr = new XMLHttpRequest();
 
@@ -133,6 +161,7 @@ function post_to_db(url, formData, form) {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				$(form).fadeOut();
+				clear_form(form);
 				get_hikes();
 				$('#hike_list').fadeIn();
 				$('#add_hike_button').fadeIn();
@@ -275,6 +304,8 @@ $('#add_button, #edit_add_button').click(function() {
 
 $('#back_button').click(function() {
 	$('#add_hike, #edit_hike').hide();
+	clear_form('#edit_hike_form');
+	clear_form('#add_hike_form');
 	$('#back_button').hide();
 	$('#add_hike_button').show();
 	get_hikes();

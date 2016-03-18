@@ -58,6 +58,9 @@ function delete_db($url) {
 }
 
 function put_attachment($result, $attachment) {
+	if (is_string($result)) {
+		$result = json_decode($result);
+	}
 	$doc_info = get_doc_info($result);
 	$doc_id = $doc_info["id"];
 	$rev = $doc_info["rev"];

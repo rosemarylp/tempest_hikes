@@ -53,10 +53,6 @@
 				<div id="edit_directions_container">
 					<label for="edit_directions">Driving Directions: </label>
 					<button id="edit_add_button">+</button>
-					<div class="direction_container">
-						<input type="text" name="directions[]" id="edit_directions">
-						<i class="fa fa-times-circle delete_direction"></i>
-					</div>
 				</div>
 
 				<div id="edit_image_container">
